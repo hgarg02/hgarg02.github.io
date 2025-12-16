@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Portfolio</title>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         EXTERNAL DEPENDENCIES
+         Load external resources first for better performance
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <!-- Google Fonts (Syne for headings, Inter for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Syne:wght@700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons (for UI icons and menu) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Dev Icons (for technology stack badges) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <!-- Splide Carousel Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         CORE CSS FRAMEWORK
+         Load foundation styles FIRST before any component styles
+         Order: Variables → Reset → Global → Layout
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <link rel="stylesheet" href="./css/variables.css"> <!-- CSS Custom Properties / Design Tokens -->
+    <link rel="stylesheet" href="./css/reset.css"> <!-- Browser Reset / Normalize -->
+    <link rel="stylesheet" href="./css/global.css"> <!-- Global Typography & Base Styles -->
+    <link rel="stylesheet" href="./css/layout.css"> <!-- Layout Utilities & Grid System -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         BACKGROUND & CURSOR SYSTEM
+         Load early as it affects entire page rendering
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <link rel="stylesheet" href="./css/background-cursor.css">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         COMPONENT STYLES
+         Load in visual order (top to bottom of page)
+         Each component is self-contained and independent
+         ═══════════════════════════════════════════════════════════════════ -->
+
+    <link rel="stylesheet" href="./css/navbar.css"> <!-- Navigation Bar (Fixed) -->
+    <link rel="stylesheet" href="./css/skill-badge-square.css"> <!-- Skill Badges -->
+    <link rel="stylesheet" href="./css/skill-badge-wide.css"> <!-- Skill Badges -->
+    <link rel="stylesheet" href="./css/hero.css"> <!-- Hero Section -->
+    <link rel="stylesheet" href="./css/about.css"> <!-- About Section -->
+    <link rel="stylesheet" href="./css/project.css"> <!-- Projects Section -->
+    <link rel="stylesheet" href="./css/experience.css"> <!-- Experience Timeline -->
+    <link rel="stylesheet" href="./css/skills.css"> <!-- Skills Section -->
+    <link rel="stylesheet" href="./css/education.css"> <!-- Education & Certifications -->
+    <link rel="stylesheet" href="./css/contact.css"> <!-- Contact Section -->
+    <link rel="stylesheet" href="./css/footer.css"> <!-- Footer (Load Last) -->
+</head>
+
+<body>
+    <!-- Background Canvas Layers -->
+    <div class="background-component-canvas-container">
+        <canvas id="background-component-grid-canvas"></canvas>
+        <canvas id="background-component-particles-canvas"></canvas>
+    </div>
+
+    <!-- Custom Cursor Elements -->
+    <div id="background-component-cursor" class="background-component-cursor-wrapper">
+        <div class="background-component-cursor-dot"></div>
+        <div class="background-component-cursor-ring"></div>
+    </div>
+
+    <!-- Cursor Trail Container -->
+    <div id="background-component-trail-container"></div>
+
+    <!-- Mobile Overlay Menu -->
+    <div class="navbar-component-mobile-overlay" id="navbar-component-mobile-overlay">
+        <button class="navbar-component-mobile-close-btn" id="navbar-component-mobile-close-btn"
+            aria-label="Close Menu">&times;</button>
+
+        <div class="navbar-component-mobile-nav-wrapper">
+            <!-- Moving background marker -->
+            <div class="navbar-component-mobile-marker"></div>
+
+            <!-- Navigation links -->
+            <a href="#section_2" class="navbar-component-mobile-nav-item navbar-component-scroll-link">About</a>
+            <a href="#section_3" class="navbar-component-mobile-nav-item navbar-component-scroll-link">Projects</a>
+            <a href="#section_4" class="navbar-component-mobile-nav-item navbar-component-scroll-link">Experience</a>
+            <a href="#section_5" class="navbar-component-mobile-nav-item navbar-component-scroll-link">Skills</a>
+            <a href="#section_6" class="navbar-component-mobile-nav-item navbar-component-scroll-link">Education</a>
+            <a href="#section_7" class="navbar-component-mobile-nav-item navbar-component-scroll-link">Contact</a>
+
+            <a href="resume.pdf" class="navbar-component-resume-btn navbar-component-resume-btn-mobile" download>
+                <i class="bi bi-cloud-arrow-down-fill"></i> Resume
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar-component-wrapper" id="navbar-component-navbar">
+        <div class="navbar-component-inner-container">
+
+            <!-- Brand/Logo -->
+            <a href="#section_1" class="navbar-component-brand navbar-component-scroll-link">First</a>
+
+            <!-- Mobile Controls -->
+            <div class="navbar-component-mobile-controls">
+                <a class="navbar-component-resume-btn navbar-component-resume-btn-compact" href="resume.pdf" download>
+                    <i class="bi bi-cloud-arrow-down-fill"></i> Resume
+                </a>
+                <button class="navbar-component-hamburger-btn" id="navbar-component-hamburger-btn"
+                    aria-label="Open Menu">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="navbar-component-desktop-menu">
+                <ul class="navbar-component-nav-list">
+                    <!-- Moving background marker -->
+                    <div class="navbar-component-desktop-marker"></div>
+
+                    <li class="navbar-component-nav-item">
+                        <a class="navbar-component-nav-link navbar-component-scroll-link" href="#section_2">About</a>
+                    </li>
+                    <li class="navbar-component-nav-item">
+                        <a class="navbar-component-nav-link navbar-component-scroll-link" href="#section_3">Projects</a>
+                    </li>
+                    <li class="navbar-component-nav-item">
+                        <a class="navbar-component-nav-link navbar-component-scroll-link"
+                            href="#section_4">Experience</a>
+                    </li>
+                    <li class="navbar-component-nav-item">
+                        <a class="navbar-component-nav-link navbar-component-scroll-link" href="#section_5">Skills</a>
+                    </li>
+                    <li class="navbar-component-nav-item">
+                        <a class="navbar-component-nav-link navbar-component-scroll-link"
+                            href="#section_6">Education</a>
+                    </li>
+                    <li class="navbar-component-nav-item">
+                        <a class="navbar-component-nav-link navbar-component-scroll-link" href="#section_7">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="navbar-component-desktop-actions">
+                <a class="navbar-component-resume-btn navbar-component-resume-btn-desktop" href="resume.pdf" download>
+                    <i class="bi bi-file-earmark-person"></i> Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="section_1">
+        <div class="hero-section-container">
+
+            <!-- LEFT COLUMN: Hero Content -->
+            <div class="hero-section-left-column">
+
+                <!-- Available for Hire Badge (Breathing Glow) -->
+                <div class="hero-section-left-column-status-badge">
+                    <span class="hero-section-left-column-status-badge-indicator"></span>
+                    Available for Hire
+                </div>
+
+                <!-- Main Greeting with Waving Emoji -->
+                <h1 class="hero-section-left-column-title">
+                    Hi <span class="hero-section-left-column-title-emoji">👋</span> I'm<br>Harsh Garg
+                </h1>
+
+                <!-- Typewriter Text with Blinking Cursor -->
+                <p class="hero-section-left-column-subtitle">
+                    <span id="hero-section-left-column-subtitle-typewriter-text"></span><span
+                        class="hero-section-left-column-subtitle-typewriter-cursor"></span>
+                </p>
+
+                <!-- Call-to-Action Buttons -->
+                <div class="hero-section-left-column-cta-btns">
+                    <a href="#projects-section" class="hero-section-left-column-cta-btns-primary-btn">
+                        <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
+                        View Work
+                    </a>
+                    <a href="resume.pdf" class="hero-section-left-column-cta-btns-outline-btn" download>
+                        <i class="bi bi-download" aria-hidden="true"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Code Snippet Visual -->
+            <div class="hero-section-right-column">
+                <!-- Code Window Component -->
+                <div class="code-window" id="code-window">
+
+                    <!-- Window Header (Title Bar) -->
+                    <div class="code-window-header">
+                        <!-- Traffic Light Buttons -->
+                        <div class="code-window-header-controls">
+                            <button class="code-window-header-control-btn close" aria-label="Close"></button>
+                            <button class="code-window-header-control-btn minimize" aria-label="Minimize"></button>
+                            <button class="code-window-header-control-btn maximize" aria-label="Maximize"></button>
+                        </div>
+
+                        <!-- Theme Toggle -->
+                        <button class="code-window-header-theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                            <i class="bi bi-sun-fill code-window-header-theme-toggle-icon-sun"></i>
+                            <i class="bi bi-moon-stars-fill code-window-header-theme-toggle-icon-moon"></i>
+                        </button>
+                    </div>
+
+                    <!-- Code Display Area -->
+                    <div class="code-window-code-block-container">
+                        <pre class="code-window-code-block"><code><span class="code-window-code-block-comment">// Create a responsive navbar</span>
+<span class="code-window-code-block-keyword">const</span> <span class="code-window-code-block-function">createNavbar</span> <span class="code-window-code-block-operator">=</span> <span class="code-window-code-block-operator">(</span>config<span class="code-window-code-block-operator">)</span> <span class="code-window-code-block-operator">=></span> <span class="code-window-code-block-operator">{</span></span>
+    <span class="code-window-code-block-keyword">const</span> navbar <span class="code-window-code-block-operator">=</span> document<span class="code-window-code-block-operator">.</span><span class="code-window-code-block-function">createElement</span><span class="code-window-code-block-operator">(</span><span class="code-window-code-block-string">'nav'</span><span class="code-window-code-block-operator">);</span></span>
+    <span class="code-window-code-block-keyword">const</span> links <span class="code-window-code-block-operator">=</span> <span class="code-window-code-block-operator">[</span><span class="code-window-code-block-string">'Home'</span><span class="code-window-code-block-operator">,</span> <span class="code-window-code-block-string">'About'</span><span class="code-window-code-block-operator">,</span> <span class="code-window-code-block-string">'Projects'</span><span class="code-window-code-block-operator">,</span> <span class="code-window-code-block-string">'Contact'</span><span class="code-window-code-block-operator">];</span></span>
+    <span class="code-window-code-block-keyword">links<span class="code-window-code-block-operator">.</span><span class="code-window-code-block-function">forEach</span><span class="code-window-code-block-operator">(</span>link <span class="code-window-code-block-operator">=></span> <span class="code-window-code-block-operator">{</span></span>
+        <span class="code-window-code-block-keyword">const</span> anchor <span class="code-window-code-block-operator">=</span> document<span class="code-window-code-block-operator">.</span><span class="code-window-code-block-function">createElement</span><span class="code-window-code-block-operator">(</span><span class="code-window-code-block-string">'a'</span><span class="code-window-code-block-operator">);</span></span>
+        <span class="code-window-code-block-keyword">anchor<span class="code-window-code-block-operator">.</span>textContent <span class="code-window-code-block-operator">=</span> link<span class="code-window-code-block-operator">;</span></span>
+        <span class="code-window-code-block-keyword">anchor<span class="code-window-code-block-operator">.</span>href <span class="code-window-code-block-operator">=</span> <span class="code-window-code-block-string">`#</span><span class="code-window-code-block-operator">${</span>link<span class="code-window-code-block-operator">.</span><span class="code-window-code-block-function">toLowerCase</span><span class="code-window-code-block-operator">()</span><span class="code-window-code-block-operator">}</span><span class="code-window-code-block-string">`</span><span class="code-window-code-block-operator">;</span></span>
+        <span class="code-window-code-block-keyword">navbar<span class="code-window-code-block-operator">.</span><span class="code-window-code-block-function">appendChild</span><span class="code-window-code-block-operator">(</span>anchor<span class="code-window-code-block-operator">);</span></span>
+    <span class="code-window-code-block-operator">});</span></span>
+    <span class="code-window-code-block-keyword">return</span> navbar<span class="code-window-code-block-operator">;</span></span>
+<span class="code-window-code-block-operator">};</span></span>
+</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="section_2">
+        <div class="about-section-container">
+
+            <!--═══════════════════════════════════════════════════════════════════
+                HEADING SECTION - STANDARDIZED
+                ═══════════════════════════════════════════════════════════════════ -->
+            <div class="section-heading-wrapper">
+                <i class="bi bi-person-circle section-heading-icon"></i>
+                <h2 class="section-heading-title">About Me</h2>
+                <img src="https://picsum.photos/160" class="section-heading-avatar" alt="Profile Avatar" loading="lazy">
+            </div>
+
+            <!--═══════════════════════════════════════════════════════════════════
+                SECTION CONTENT
+                ═══════════════════════════════════════════════════════════════════ -->
+            <div class="about-section-content-wrapper">
+                <div class="about-section-content-grid">
+
+                    <!--═══════════════════════════════════════════════════════════════
+                        LEFT COLUMN: Bio Content + Metrics
+                        ═══════════════════════════════════════════════════════════════ -->
+                    <div class="about-section-left-column">
+
+                        <!-- Bio Content -->
+                        <div class="about-section-bio-content">
+                            <p class="about-section-bio-paragraph">
+                                I am a results-driven Senior Java Developer with over 7 years of experience in designing
+                                and building scalable, high-performance enterprise applications. My expertise lies in
+                                the
+                                Spring Ecosystem (Boot, Cloud, Security) and modern cloud-native architectures.
+                            </p>
+                            <p class="about-section-bio-paragraph">
+                                I thrive in solving complex backend challenges, optimizing database performance, and
+                                leading teams to deliver robust microservices solutions. I am passionate about clean
+                                code,
+                                test-driven development, and staying ahead of the technology curve.
+                            </p>
+                            <p class="about-section-bio-paragraph">
+                                Beyond coding, I enjoy mentoring junior developers, contributing to open-source
+                                projects,
+                                and exploring emerging technologies. I believe in continuous learning and sharing
+                                knowledge
+                                with the developer community.
+                            </p>
+                        </div>
+
+                        <!-- Metrics Row -->
+                        <div class="about-section-metrics-row">
+                            <div class="about-section-metric-card">
+                                <div class="about-section-metric-card-inner">
+                                    <h3 class="about-section-metric-value">7+</h3>
+                                    <p class="about-section-metric-label">Years</p>
+                                </div>
+                            </div>
+                            <div class="about-section-metric-card">
+                                <div class="about-section-metric-card-inner">
+                                    <h3 class="about-section-metric-value">25+</h3>
+                                    <p class="about-section-metric-label">Projects</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ═════════════════════════════════════════════════════════════
+                        RIGHT COLUMN: Profile Image
+                        ═════════════════════════════════════════════════════════════ -->
+                    <div class="about-section-right-column">
+                        <div class="about-section-image-wrapper">
+                            <div class="about-section-image-container">
+                                <img src="https://picsum.photos/seed/developer/600/800" alt="Developer Portrait"
+                                    class="about-section-profile-image" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT SECTION -->
+    <section class="project-section" id="section_3">
+        <div class="project-section-container">
+
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 HEADING SECTION
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="section-heading-wrapper">
+                <i class="bi bi-briefcase section-heading-icon"></i>
+                <h2 class="section-heading-title">Projects</h2>
+                <img src="https://picsum.photos/160" class="section-heading-avatar" alt="Profile Avatar" loading="lazy">
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 SECTION CONTENT
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="project-section-content-wrapper">
+
+                <!-- PROJECT FILTER BUTTONS -->
+                <div class="project-filters text-center mb-5">
+                    <button class="project-filter-btn active" data-filter="all">All</button>
+                    <button class="project-filter-btn" data-filter="fullstack">Full Stack</button>
+                    <button class="project-filter-btn" data-filter="frontend">Frontend</button>
+                    <button class="project-filter-btn" data-filter="backend">Backend</button>
+                    <button class="project-filter-btn" data-filter="mobile">Mobile</button>
+                </div>
+
+                <div class="project-cards-container">
+
+                    <!-- Project Card 1: E-Commerce Platform -->
+                    <article class="project-card" data-category="fullstack">
+                        <div class="project-card-inner">
+                            <!-- Info Column (Left on Desktop) -->
+                            <div class="project-info-column">
+                                <h3 class="project-title">🛒 E-Commerce Platform</h3>
+                                <p class="project-description">
+                                    A full-featured e-commerce solution with real-time inventory management,
+                                    secure payment processing, and responsive UI. Built with Spring Boot microservices
+                                    architecture and React for the frontend.
+                                </p>
+                                <!-- Tech Stack -->
+                                <div class="project-tech-stack">
+                                    <div class="skill-badge-square java">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                                <span class="skill-badge-label">JAVA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square spring">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                                <span class="skill-badge-label">SPRING</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square react">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-react-original colored"></i>
+                                                <span class="skill-badge-label">REACT</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square postgresql">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-postgresql-plain colored"></i>
+                                                <span class="skill-badge-label">POSTGRES</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square docker">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                                <span class="skill-badge-label">DOCKER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square aws">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i
+                                                    class="skill-badge-icon devicon-amazonwebservices-plain-wordmark colored"></i>
+                                                <span class="skill-badge-label">AWS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- CTA Buttons -->
+                                <div class="project-actions">
+                                    <a href="#" class="cta-btn cta-btn--primary" aria-label="View Demo" target="_blank"
+                                        rel="noopener noreferrer">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                        Live Demo
+                                    </a>
+                                    <a href="#" class="cta-btn cta-btn--secondary" aria-label="View Code"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="bi bi-github"></i>
+                                        View Code
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Carousel Column (Right on Desktop) -->
+                            <div class="project-carousel-column">
+                                <div class="splide" aria-label="E-Commerce Platform Screenshots">
+                                    <div class="splide__track">
+                                        <ul class="splide__list">
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/ecommerce1/800/600"
+                                                    alt="Screenshot 1" loading="lazy">
+                                            </li>
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/ecommerce2/800/600"
+                                                    alt="Screenshot 2" loading="lazy">
+                                            </li>
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/ecommerce3/800/600"
+                                                    alt="Screenshot 3" loading="lazy">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 2: Task Management App -->
+                    <article class="project-card" data-category="fullstack frontend">
+                        <div class="project-card-inner">
+                            <div class="project-info-column">
+                                <h3 class="project-title">📋 Task Management System</h3>
+                                <p class="project-description">
+                                    Collaborative task manager with real-time updates, drag-and-drop functionality,
+                                    and team collaboration features. Powered by Node.js, Express, and Vue.js with
+                                    WebSocket
+                                    integration.
+                                </p>
+                                <div class="project-tech-stack">
+                                    <div class="skill-badge-square node">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-nodejs-plain colored"></i>
+                                                <span class="skill-badge-label">NODE</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square express">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-express-original colored"></i>
+                                                <span class="skill-badge-label">EXPRESS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square vue">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-vuejs-plain colored"></i>
+                                                <span class="skill-badge-label">VUE</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square mongodb">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-mongodb-plain colored"></i>
+                                                <span class="skill-badge-label">MONGO</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Use 'web' icon for generic websocket if no specific one exists -->
+                                    <div class="skill-badge-square websockets">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon bi bi-hdd-network"></i>
+                                                <span class="skill-badge-label">SOCKETS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="#" class="cta-btn cta-btn--primary" aria-label="View Demo" target="_blank"
+                                        rel="noopener noreferrer">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                        Live Demo
+                                    </a>
+                                    <a href="#" class="cta-btn cta-btn--secondary" aria-label="View Code"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="bi bi-github"></i>
+                                        View Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-carousel-column">
+                                <div class="splide" aria-label="Task Management Screenshots">
+                                    <div class="splide__track">
+                                        <ul class="splide__list">
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/task1/800/600" alt="Screenshot 1"
+                                                    loading="lazy">
+                                            </li>
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/task2/800/600" alt="Screenshot 2"
+                                                    loading="lazy">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 3: Cloud Native Platform -->
+                    <article class="project-card" data-category="backend cloud">
+                        <div class="project-card-inner">
+                            <div class="project-info-column">
+                                <h3 class="project-title">☁️ Cloud Native Ecosystem</h3>
+                                <p class="project-description">
+                                    Enterprise-grade microservices platform featuring service discovery, load balancing,
+                                    centralized configuration, and distributed tracing. Deployed on Kubernetes with
+                                    CI/CD
+                                    automation.
+                                </p>
+                                <div class="project-tech-stack">
+                                    <span class="tech-badge">Java</span>
+                                    <span class="tech-badge">Spring Cloud</span>
+                                    <span class="tech-badge">Kubernetes</span>
+                                    <span class="tech-badge">Docker</span>
+                                    <span class="tech-badge">Jenkins</span>
+                                    <span class="tech-badge">AWS</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="#" class="cta-btn cta-btn--primary" aria-label="View Documentation"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                        Documentation
+                                    </a>
+                                    <a href="#" class="cta-btn cta-btn--secondary" aria-label="View Code"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <i class="bi bi-github"></i>
+                                        View Code
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="project-carousel-column">
+                                <div class="splide" aria-label="Cloud Platform Screenshots">
+                                    <div class="splide__track">
+                                        <ul class="splide__list">
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/cloud1/800/600" alt="Screenshot 1"
+                                                    loading="lazy">
+                                            </li>
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/cloud2/800/600" alt="Screenshot 2"
+                                                    loading="lazy">
+                                            </li>
+                                            <li class="splide__slide">
+                                                <img src="https://picsum.photos/seed/cloud3/800/600" alt="Screenshot 3"
+                                                    loading="lazy">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section class="experience-section" id="section_4">
+        <div class="experience-section-container">
+
+            <!-- ═══════════════════════════════════════════════════════════════════════
+                    SECTION HEADING
+                    ═══════════════════════════════════════════════════════════════════════ -->
+            <div class="experience-scroll-reveal">
+                <div class="section-heading-wrapper">
+                    <i class="bi bi-briefcase section-heading-icon"></i>
+                    <h2 class="section-heading-title">Experience</h2>
+                    <img src="https://picsum.photos/160" class="section-heading-avatar" alt="Profile Avatar"
+                        loading="lazy">
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════
+                 SECTION CONTENT
+                 ═══════════════════════════════════════════════════════════════════════ -->
+            <div class="experience-section-content-wrapper">
+                <!-- ═══════════════════════════════════════════════════════════════════════
+                    TIMELINE (Alternating Left/Right Layout)
+                    ═══════════════════════════════════════════════════════════════════════ -->
+                <div class="timeline experience-scroll-reveal">
+
+                    <!-- Timeline Item 1 (Right Side) -->
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-item-content">
+                            <span class="timeline-item-date">2023 - Present</span>
+                            <div class="experience-card">
+                                <div class="experience-card-header">
+                                    <div class="experience-card-meta">
+                                        <div class="experience-card-logo-wrapper">
+                                            <img src="https://picsum.photos/seed/meta/512" alt="Meta"
+                                                class="experience-card-logo" loading="lazy">
+                                        </div>
+                                        <div>
+                                            <h3 class="experience-card-title">Lead Java Developer</h3>
+                                            <h4 class="experience-card-company">Meta</h4>
+                                            <span class="experience-card-location">San Francisco, CA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="experience-card-details">
+                                    <li>Leading the architecture and development of next-generation microservices
+                                        platforms
+                                        using Spring Boot and Spring Cloud.</li>
+                                    <li>Designing and implementing scalable, resilient, and secure services.</li>
+                                    <li>Mentoring junior developers and conducting code reviews.</li>
+                                    <li>Establishing best practices for software development.</li>
+                                    <li>Driving the adoption of modern technologies like Docker and Kubernetes to
+                                        improve
+                                        development workflow and deployment.</li>
+                                </ul>
+                                <div class="experience-card-techstack">
+                                    <div class="skill-badge-square java">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                                <span class="skill-badge-label">JAVA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square spring">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                                <span class="skill-badge-label">SPRING</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square docker">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                                <span class="skill-badge-label">DOCKER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square kubernetes">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-kubernetes-plain colored"></i>
+                                                <span class="skill-badge-label">K8S</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 (Left Side)-->
+                    <div class="timeline-item timeline-item-left">
+                        <div class="timeline-item-content">
+                            <span class="timeline-item-date">2021 - 2022</span>
+                            <div class="experience-card">
+                                <div class="experience-card-header">
+                                    <div class="experience-card-meta">
+                                        <div class="experience-card-logo-wrapper">
+                                            <img src="https://picsum.photos/seed/google/512" alt="Google"
+                                                class="experience-card-logo" loading="lazy">
+                                        </div>
+                                        <div>
+                                            <h3 class="experience-card-title">Software Engineer</h3>
+                                            <h4 class="experience-card-company">Google</h4>
+                                            <span class="experience-card-location">San Francisco, CA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="experience-card-details">
+                                    <li>Responsible for end-to-end development of enterprise-level web applications.
+                                    </li>
+                                    <li>Built robust backend services using Java and the Spring Framework.</li>
+                                    <li>Developed dynamic and responsive user interfaces using React and Angular.</li>
+                                    <li>Performed database design and optimization.</li>
+                                    <li>Implemented real-time features using WebSockets to enhance user experience.</li>
+                                </ul>
+                                <div class="experience-card-techstack">
+                                    <div class="skill-badge-square java">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                                <span class="skill-badge-label">JAVA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square spring">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                                <span class="skill-badge-label">SPRING</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square docker">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                                <span class="skill-badge-label">DOCKER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square kubernetes">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-kubernetes-plain colored"></i>
+                                                <span class="skill-badge-label">K8S</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 (Right Side) -->
+                    <div class="timeline-item timeline-item-right">
+                        <div class="timeline-item-content">
+                            <span class="timeline-item-date">2020 - 2021</span>
+                            <div class="experience-card">
+                                <div class="experience-card-header">
+                                    <div class="experience-card-meta">
+                                        <div class="experience-card-logo-wrapper">
+                                            <img src="https://picsum.photos/seed/amazon/512" alt="Amazon"
+                                                class="experience-card-logo" loading="lazy">
+                                        </div>
+                                        <div>
+                                            <h3 class="experience-card-title">Associate Software Engineer</h3>
+                                            <h4 class="experience-card-company">Amazon</h4>
+                                            <span class="experience-card-location">San Francisco, CA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="experience-card-details">
+                                    <li>Contributed to the development of minimum viable products (MVPs) in an agile
+                                        environment.</li>
+                                    <li>Gained hands-on experience with Java, Spring, React, and relational databases.
+                                    </li>
+                                    <li>Actively involved in all phases of the development lifecycle (requirements,
+                                        design,
+                                        coding, testing, deployment).</li>
+                                    <li>Developed a solid foundation in software engineering principles and practices.
+                                    </li>
+                                </ul>
+                                <div class="experience-card-techstack">
+                                    <div class="skill-badge-square java">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                                <span class="skill-badge-label">JAVA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square spring">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                                <span class="skill-badge-label">SPRING</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square docker">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                                <span class="skill-badge-label">DOCKER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square kubernetes">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-kubernetes-plain colored"></i>
+                                                <span class="skill-badge-label">K8S</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="skills-section" id="section_5">
+        <div class="skills-section-container">
+            <!-- ═══════════════════════════════════════════════════════════════════
+                    HEADING SECTION
+                    ═══════════════════════════════════════════════════════════════════ -->
+            <!-- ═══════════════════════════════════════════════════════════════════
+                    HEADING SECTION - STANDARDIZED
+                    ═══════════════════════════════════════════════════════════════════ -->
+            <div class="section-heading-wrapper">
+                <i class="bi bi-tools section-heading-icon"></i>
+                <h2 class="section-heading-title">Technical Skills</h2>
+                <img src="https://picsum.photos/seed/skills/160" class="section-heading-avatar" alt="Skills Avatar"
+                    loading="lazy">
+            </div>
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 SECTION CONTENT
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="skills-section-content-wrapper">
+                <!-- ═══════════════════════════════════════════════════════════════════
+                        SKILLS CATEGORY CARDS CONTAINER
+                        ═══════════════════════════════════════════════════════════════════ -->
+                <div class="skills-section-category-card-container">
+                    <!-- ═══════════════════════════════════════════════════════════════
+                        Backend Skills Category Card
+                        ═══════════════════════════════════════════════════════════ -->
+                    <div class="skills-section-category-card-wrapper">
+                        <div class="skills-section-category-card-header-wrapper category-card-header-backend">
+                            <i class="bi bi-server category-card-header-icon"></i>
+                            <h3 class="category-card-header-title">Backend</h3>
+                        </div>
+                        <div class="category-card-skills-carousel-wrapper">
+                            <div class="category-card-skills-carousel" data-speed="20">
+                                <!-- First set of skills -->
+                                <div class="skill-badge-wide java">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                            <span class="skill-badge-label">Java</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide spring">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                            <span class="skill-badge-label">Spring Boot</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide hibernate">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-hibernate-plain colored"></i>
+                                            <span class="skill-badge-label">Hibernate</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide postgresql">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-postgresql-plain colored"></i>
+                                            <span class="skill-badge-label">PostgreSQL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide mysql">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-mysql-plain colored"></i>
+                                            <span class="skill-badge-label">MySQL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide mongodb">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-mongodb-plain colored"></i>
+                                            <span class="skill-badge-label">MongoDB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Duplicate set for seamless loop -->
+                                <div class="skill-badge-wide java">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                            <span class="skill-badge-label">Java</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide spring">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                            <span class="skill-badge-label">Spring Boot</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide hibernate">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-hibernate-plain colored"></i>
+                                            <span class="skill-badge-label">Hibernate</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide postgresql">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-postgresql-plain colored"></i>
+                                            <span class="skill-badge-label">PostgreSQL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide mysql">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-mysql-plain colored"></i>
+                                            <span class="skill-badge-label">MySQL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide mongodb">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-mongodb-plain colored"></i>
+                                            <span class="skill-badge-label">MongoDB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ═══════════════════════════════════════════════════════════════
+                        Frontend Skills Category Card
+                        ═══════════════════════════════════════════════════════════ -->
+                    <div class="skills-section-category-card-wrapper">
+                        <div class="skills-section-category-card-header-wrapper category-card-header-frontend">
+                            <i class="bi bi-window-desktop category-card-header-icon"></i>
+                            <h3 class="category-card-header-title">Frontend</h3>
+                        </div>
+                        <div class="category-card-skills-carousel-wrapper">
+                            <div class="category-card-skills-carousel" data-speed="22">
+                                <!-- First set -->
+                                <div class="skill-badge-wide react">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-react-original colored"></i>
+                                            <span class="skill-badge-label">React</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide vue">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-vuejs-plain colored"></i>
+                                            <span class="skill-badge-label">Vue.js</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide angular">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-angularjs-plain colored"></i>
+                                            <!-- Using angularjs for icon consistency or just angular -->
+                                            <span class="skill-badge-label">Angular</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide javascript">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-javascript-plain colored"></i>
+                                            <span class="skill-badge-label">JavaScript</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide typescript">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-typescript-plain colored"></i>
+                                            <span class="skill-badge-label">TypeScript</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide html5">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-html5-plain colored"></i>
+                                            <span class="skill-badge-label">HTML5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide css3">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-css3-plain colored"></i>
+                                            <span class="skill-badge-label">CSS3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Duplicate set -->
+                                <div class="skill-badge-wide react">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-react-original colored"></i>
+                                            <span class="skill-badge-label">React</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide vue">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-vuejs-plain colored"></i>
+                                            <span class="skill-badge-label">Vue.js</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide angular">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-angularjs-plain colored"></i>
+                                            <span class="skill-badge-label">Angular</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide javascript">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-javascript-plain colored"></i>
+                                            <span class="skill-badge-label">JavaScript</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide typescript">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-typescript-plain colored"></i>
+                                            <span class="skill-badge-label">TypeScript</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide html5">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-html5-plain colored"></i>
+                                            <span class="skill-badge-label">HTML5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide css3">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-css3-plain colored"></i>
+                                            <span class="skill-badge-label">CSS3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ═══════════════════════════════════════════════════════════════
+                        DevOps & Cloud Skills Category Card
+                        ═══════════════════════════════════════════════════════════ -->
+                    <div class="skills-section-category-card-wrapper">
+                        <div class="skills-section-category-card-header-wrapper category-card-header-devops">
+                            <i class="bi bi-cloud-arrow-up category-card-header-icon"></i>
+                            <h3 class="category-card-header-title">DevOps & Cloud</h3>
+                        </div>
+                        <div class="category-card-skills-carousel-wrapper">
+                            <div class="category-card-skills-carousel" data-speed="18">
+                                <!-- First set -->
+                                <div class="skill-badge-wide docker">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                            <span class="skill-badge-label">Docker</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide kubernetes">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-kubernetes-plain colored"></i>
+                                            <span class="skill-badge-label">Kubernetes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide aws">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i
+                                                class="skill-badge-icon devicon-amazonwebservices-plain-wordmark colored"></i>
+                                            <span class="skill-badge-label">AWS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide jenkins">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-jenkins-line"></i>
+                                            <span class="skill-badge-label">Jenkins</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide git">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-git-plain colored"></i>
+                                            <span class="skill-badge-label">Git</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide github">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-github-original colored"></i>
+                                            <span class="skill-badge-label">GitHub</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Duplicate set -->
+                                <div class="skill-badge-wide docker">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                            <span class="skill-badge-label">Docker</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide kubernetes">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-kubernetes-plain colored"></i>
+                                            <span class="skill-badge-label">Kubernetes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide aws">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i
+                                                class="skill-badge-icon devicon-amazonwebservices-plain-wordmark colored"></i>
+                                            <span class="skill-badge-label">AWS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide jenkins">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-jenkins-line"></i>
+                                            <span class="skill-badge-label">Jenkins</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide git">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-git-plain colored"></i>
+                                            <span class="skill-badge-label">Git</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skill-badge-wide github">
+                                    <div class="skill-badge-squircle-box">
+                                        <div class="skill-badge-squircle-content">
+                                            <i class="skill-badge-icon devicon-github-original"></i>
+                                            <span class="skill-badge-label">GitHub</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION SECTION -->
+    <section class="education-section" id="section_6">
+        <div class="education-section-container">
+
+            <!-- ═══════════════════════════════════════════════════════════════════════
+                 SECTION HEADING
+                 ═══════════════════════════════════════════════════════════════════════ -->
+            <div class="section-heading-wrapper">
+                <i class="bi bi-mortarboard section-heading-icon"></i>
+                <h2 class="section-heading-title">Education & Certifications</h2>
+                <img src="https://picsum.photos/seed/education/160" class="section-heading-avatar"
+                    alt="Education Avatar" loading="lazy" />
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════════════
+                 SECTION CONTENT
+                 ═══════════════════════════════════════════════════════════════════════ -->
+            <div class="education-section-content-wrapper">
+                <!-- ═══════════════════════════════════════════════════════════════════════
+                     TWO-COLUMN GRID (Education + Certifications)
+                     ═══════════════════════════════════════════════════════════════════════ -->
+                <div class="education-section-grid-container">
+
+                    <!-- LEFT COLUMN: Education -->
+                    <div class="left-column-education-stack">
+                        <h3 class="column-title">🎓 Education</h3>
+
+                        <!-- Education Card 1 -->
+                        <div class="education-section-education-card">
+                            <h4 class="education-card-title-degree">Master of Science in Computer Science</h4>
+                            <div class="education-card-meta-details">
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-building education-card-meta-detail-icon"></i>
+                                    <a href="#" title="Visit Stanford University website">Stanford University</a>
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-geo-alt-fill education-card-meta-detail-icon"></i>
+                                    Stanford, CA
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-calendar-event education-card-meta-detail-icon"></i>
+                                    2018
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-award-fill education-card-meta-detail-icon"></i>
+                                    GPA: 3.9/4.0
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Education Card 2 -->
+                        <div class="education-section-education-card">
+                            <h4 class="education-card-title-degree">Bachelor of Science in Software Engineering</h4>
+                            <div class="education-card-meta-details">
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-building education-card-meta-detail-icon"></i>
+                                    <a href="#" title="Visit UT Austin website">University of Texas at Austin</a>
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-geo-alt-fill education-card-meta-detail-icon"></i>
+                                    Austin, TX
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-calendar-event education-card-meta-detail-icon"></i>
+                                    2016
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-award-fill education-card-meta-detail-icon"></i>
+                                    GPA: 3.8/4.0
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Education Card 3 -->
+                        <div class="education-section-education-card">
+                            <h4 class="education-card-title-degree">Diploma in Web Development</h4>
+                            <div class="education-card-meta-details">
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-building education-card-meta-detail-icon"></i>
+                                    <a href="#" title="Visit Technical Training Center website">Technical Training
+                                        Center</a>
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-geo-alt-fill education-card-meta-detail-icon"></i>
+                                    Online / Remote
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-calendar-event education-card-meta-detail-icon"></i>
+                                    2015 - 2016
+                                </span>
+                                <span class="education-card-meta-detail-item">
+                                    <i class="bi bi-award-fill education-card-meta-detail-icon"></i>
+                                    Grade: Distinction
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN: Certifications -->
+                    <div class="right-column-certification-stack">
+                        <h3 class="column-title">🏅 Certifications</h3>
+
+                        <!-- Certification Card 1 -->
+                        <div class="education-section-certification-card">
+                            <div class="education-section-certification-card-flex-layout">
+                                <div class="certification-card-certificate-icon">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </div>
+                                <div class="certification-card-meta-details">
+                                    <h5 class="certification-card-certificate-title">AWS Certified Solutions Architect –
+                                        Associate</h5>
+                                    <p class="certification-card-certificate-issuer">Amazon Web Services</p>
+                                    <p class="certification-card-certificate-year">2024</p>
+                                    <a href="#" class="certification-card-certificate-view-link"
+                                        title="View AWS certification">
+                                        View Credential
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certification Card 2 -->
+                        <div class="education-section-certification-card">
+                            <div class="education-section-certification-card-flex-layout">
+                                <div class="certification-card-certificate-icon">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </div>
+                                <div class="certification-card-meta-details">
+                                    <h5 class="certification-card-certificate-title">Oracle Certified Professional Java
+                                        SE
+                                        11
+                                        Developer</h5>
+                                    <p class="certification-card-certificate-issuer">Oracle University</p>
+                                    <p class="certification-card-certificate-year">2023</p>
+                                    <a href="#" class="certification-card-certificate-view-link"
+                                        title="View Oracle certification">
+                                        View Credential
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certification Card 3 -->
+                        <div class="education-section-certification-card">
+                            <div class="education-section-certification-card-flex-layout">
+                                <div class="certification-card-certificate-icon">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </div>
+                                <div class="certification-card-meta-details">
+                                    <h5 class="certification-card-certificate-title">Certified Kubernetes Administrator
+                                        (CKA)
+                                    </h5>
+                                    <p class="certification-card-certificate-issuer">The Linux Foundation</p>
+                                    <p class="certification-card-certificate-year">2023</p>
+                                    <a href="#" class="certification-card-certificate-view-link"
+                                        title="View CKA certification">
+                                        View Credential
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certification Card 4 -->
+                        <div class="education-section-certification-card">
+                            <div class="education-section-certification-card-flex-layout">
+                                <div class="certification-card-certificate-icon">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </div>
+                                <div class="certification-card-meta-details">
+                                    <h5 class="certification-card-certificate-title">Spring Professional Certification
+                                    </h5>
+                                    <p class="certification-card-certificate-issuer">Spring Academy</p>
+                                    <p class="certification-card-certificate-year">2022</p>
+                                    <a href="#" class="certification-card-certificate-view-link"
+                                        title="View Spring certification">
+                                        View Credential
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="section_7">
+        <div class="contact-section-container">
+
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 HEADING SECTION
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 HEADING SECTION - STANDARDIZED
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="section-heading-wrapper">
+                <i class="bi bi-envelope section-heading-icon"></i>
+                <h2 class="section-heading-title">Contact Me</h2>
+                <img src="https://picsum.photos/seed/contact/160" class="section-heading-avatar" alt="Contact Avatar"
+                    loading="lazy">
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 SECTION CONTENT
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="contact-section-content-wrapper">
+                <!-- ═══════════════════════════════════════════════════════════════════
+                     CONTACT CARDS ROW
+                     ═══════════════════════════════════════════════════════════════════ -->
+                <div class="contact-section-cards-row">
+
+                    <!-- Email Card -->
+                    <div class="contact-section-email-card" tabindex="0">
+                        <div class="contact-section-email-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="contact-section-email-content">
+                            <h3 class="contact-section-email-label">Email</h3>
+                            <a href="mailto:your.email@example.com" class="contact-section-email-value">
+                                your.email@example.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="contact-section-phone-card" tabindex="0">
+                        <div class="contact-section-phone-icon">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div class="contact-section-phone-content">
+                            <h3 class="contact-section-phone-label">Phone</h3>
+                            <a href="tel:1234567890" class="contact-section-phone-value">
+                                1 (234) 567-8900
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════════════════
+                 SOCIAL MEDIA SECTION
+                 ═══════════════════════════════════════════════════════════════════ -->
+                <div class="contact-section-social-wrapper">
+                    <h3 class="contact-section-follow-title">Follow Me</h3>
+                    <div class="contact-section-social-row">
+
+                        <a href="https://github.com/yourusername" class="contact-section-social-btn"
+                            data-tooltip="GitHub" aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer"
+                            tabindex="0">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <span class="contact-section-sr-only">GitHub</span>
+
+                        <a href="https://linkedin.com/in/yourusername" class="contact-section-social-btn"
+                            data-tooltip="LinkedIn" aria-label="LinkedIn Profile" target="_blank"
+                            rel="noopener noreferrer" tabindex="0">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <span class="contact-section-sr-only">LinkedIn</span>
+
+                        <a href="https://twitter.com/yourusername" class="contact-section-social-btn"
+                            data-tooltip="Twitter" aria-label="Twitter Profile" target="_blank"
+                            rel="noopener noreferrer" tabindex="0">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <span class="contact-section-sr-only">Twitter</span>
+
+                        <a href="https://dev.to/yourusername" class="contact-section-social-btn" data-tooltip="Dev.to"
+                            aria-label="Dev.to Profile" target="_blank" rel="noopener noreferrer" tabindex="0">
+                            <i class="bi bi-code-slash"></i>
+                        </a>
+                        <span class="contact-section-sr-only">Dev.to</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer-section" id="footer-section">
+        <div class="footer-section-container">
+
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 FOOTER CONTAINER GRID
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="footer-section-container-grid">
+
+                <!-- ═══════════════════════════════════════════════════════════════
+                     LEFT COLUMN: Brand & Tagline
+                     ═══════════════════════════════════════════════════════════ -->
+                <div class="footer-section-left-column">
+                    <h3 class="footer-section-brand-logo">Your Name</h3>
+                    <p class="footer-section-tagline">Full-Stack Developer | UI/UX Enthusiast</p>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════════════
+                     RIGHT COLUMN: Quick Links
+                     ═══════════════════════════════════════════════════════════ -->
+                <div class="footer-section-right-column">
+                    <div class="footer-section-quick-links-row">
+                        <a href="#sitemap" class="footer-section-quick-link-item">Sitemap</a>
+                        <a href="#privacy" class="footer-section-quick-link-item">Privacy Policy</a>
+                        <a href="#terms" class="footer-section-quick-link-item">Terms of Service</a>
+                        <a href="#contact" class="footer-section-quick-link-item">Contact</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════════
+                 COPYRIGHT SECTION
+                 ═══════════════════════════════════════════════════════════════════ -->
+            <div class="footer-section-copyright-wrapper">
+                <p class="footer-section-copyright-text">
+                    © <span id="footer-current-year">2025</span> <span>Your Name</span>. All rights reserved.
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Component JavaScript -->
+    <script src="./js/background-cursor.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/hero.js"></script>
+    <script src="./js/about.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script>
+    <!-- Utility Functions (Load First) -->
+    <script type="module" src="./js/utils.js"></script>
+    <!-- Component-Specific JS -->
+    <script type="module" src="./js/project.js"></script>
+    <script src="./js/experience.js"></script>
+    <script src="./js/skills.js"></script>
+    <script src="./js/footer.js"></script>
+    <script src="./js/skill-badge.js"></script>
+</body>
+
+</html>

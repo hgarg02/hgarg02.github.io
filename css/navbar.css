@@ -1,0 +1,463 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   🎨 NAVBAR COMPONENT - STANDALONE
+   Self-contained, integration-ready navigation with NO external dependencies
+   ═══════════════════════════════════════════════════════════════════════
+
+   FEATURES:
+   - Fixed/sticky positioning
+   - Animated marker pill following active link
+   - Mobile fullscreen overlay menu
+   - Desktop horizontal layout
+   - Scroll spy with IntersectionObserver
+   - Smooth scroll behavior
+
+   TABLE OF CONTENTS:
+   1. CSS Custom Properties (Variables)
+   2. Main Navbar Layout
+   3. Brand/Logo
+   4. Desktop Navigation
+   5. Desktop Marker Animation
+   6. Mobile Overlay System
+   7. Mobile Marker Animation
+   8. Resume Buttons
+   9. Scroll Effects
+   10. Responsive Breakpoints
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1. CSS CUSTOM PROPERTIES (VARIABLES)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+    /* Colors */
+    --navbar-color-bg: rgba(15, 23, 42, 0.85);
+    --navbar-color-white: #ffffff;
+    --navbar-color-text: #cbd5e1;
+    --navbar-color-text-dim: #94a3b8;
+    --navbar-color-accent: #6366f1;
+    --navbar-color-accent-hover: #8b5cf6;
+
+    /* Spacing */
+    --navbar-height: 80px;
+    --navbar-padding-x: 2rem;
+    --navbar-padding-y: 1rem;
+    --navbar-margin-top: 1.5rem;
+    --navbar-margin-x: 2rem;
+
+    /* Typography */
+    --navbar-font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --navbar-font-size-base: 1rem;
+    --navbar-font-size-brand: 1.75rem;
+    --navbar-font-weight-normal: 400;
+    --navbar-font-weight-medium: 500;
+    --navbar-font-weight-bold: 700;
+
+    /* Z-index */
+    --navbar-z-navbar: 1000;
+    --navbar-z-overlay: 9999;
+
+    /* Transitions */
+    --navbar-duration-fast: 0.2s;
+    --navbar-duration-normal: 0.3s;
+    --navbar-duration-slow: 0.5s;
+    --navbar-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --navbar-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Border Radius */
+    --navbar-radius-sm: 0.375rem;
+    --navbar-radius-md: 0.5rem;
+    --navbar-radius-lg: 0.75rem;
+    --navbar-radius-xl: 1rem;
+    --navbar-radius-2xl: 1.5rem;
+    --navbar-radius-pill: 100px;
+
+    /* Effects */
+    --navbar-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --navbar-shadow-glow: 0 0 20px rgba(99, 102, 241, 0.6);
+    --navbar-backdrop-blur: blur(10px);
+
+    /* Overlay & Shadows Colors */
+    --navbar-color-overlay-bg: rgba(15, 23, 42, 0.98);
+    --navbar-shadow-accent-color: rgba(99, 102, 241, 0.4);
+
+    /* Dimensions */
+    --navbar-btn-size: 50px;
+    --navbar-mobile-marker-width: 200px;
+    --navbar-mobile-marker-height: 60px;
+}
+
+/* Smooth scroll behavior */
+/* ═══════════════════════════════════════════════════════════════════════
+   2. MAIN NAVBAR LAYOUT
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-wrapper {
+    position: fixed;
+    top: var(--navbar-margin-top);
+    left: var(--navbar-margin-x);
+    right: var(--navbar-margin-x);
+    width: auto;
+    background: var(--navbar-color-bg);
+    backdrop-filter: var(--navbar-backdrop-blur);
+    -webkit-backdrop-filter: var(--navbar-backdrop-blur);
+    box-shadow: var(--navbar-shadow);
+    border-radius: var(--navbar-radius-2xl);
+    z-index: var(--navbar-z-navbar);
+    transform: translateY(-150%);
+    opacity: 0;
+    transition: transform var(--navbar-duration-slow) var(--navbar-ease-smooth),
+        opacity var(--navbar-duration-slow) var(--navbar-ease-smooth);
+}
+
+.navbar-component-wrapper.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.navbar-component-inner-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--navbar-padding-x);
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   3. BRAND/LOGO
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-brand {
+    font-size: var(--navbar-font-size-brand);
+    font-weight: var(--navbar-font-weight-bold);
+    background: linear-gradient(135deg, var(--navbar-color-accent), var(--navbar-color-accent-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    position: relative;
+    letter-spacing: -0.5px;
+    transition: transform var(--navbar-duration-normal) var(--navbar-ease-bounce),
+        filter var(--navbar-duration-normal) var(--navbar-ease-smooth);
+}
+
+.navbar-component-brand:hover {
+    color: var(--navbar-color-accent);
+    transform: scale(1.05);
+    filter: drop-shadow(var(--navbar-shadow-glow));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   4. DESKTOP NAVIGATION
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-desktop-menu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+}
+
+.navbar-component-nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.navbar-component-nav-item {
+    position: relative;
+}
+
+.navbar-component-nav-link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: var(--navbar-color-text);
+    text-decoration: none;
+    font-size: var(--navbar-font-size-base);
+    font-weight: var(--navbar-font-weight-medium);
+    border-radius: var(--navbar-radius-md);
+    transition: color var(--navbar-duration-fast) var(--navbar-ease-smooth),
+        border-color var(--navbar-duration-fast) var(--navbar-ease-smooth);
+    position: relative;
+    z-index: 2;
+    border: 2px solid transparent;
+}
+
+.navbar-component-nav-link:hover {
+    color: var(--navbar-color-white);
+    border-color: var(--navbar-color-accent);
+}
+
+.navbar-component-nav-link.active {
+    color: var(--navbar-color-white);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   5. DESKTOP MARKER ANIMATION
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-desktop-marker {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 42px;
+    background: linear-gradient(135deg, var(--navbar-color-accent), var(--navbar-color-accent-hover));
+    border-radius: var(--navbar-radius-md);
+    transition: all var(--navbar-duration-normal) var(--navbar-ease-bounce);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    box-shadow: 0 4px 12px var(--navbar-shadow-accent-color);
+}
+
+.navbar-component-desktop-marker.visible {
+    opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   6. MOBILE OVERLAY SYSTEM
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--navbar-color-overlay-bg);
+    backdrop-filter: var(--navbar-backdrop-blur);
+    -webkit-backdrop-filter: var(--navbar-backdrop-blur);
+    z-index: var(--navbar-z-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--navbar-duration-normal) var(--navbar-ease-smooth),
+        visibility var(--navbar-duration-normal) var(--navbar-ease-smooth);
+}
+
+.navbar-component-mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-component-mobile-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: var(--navbar-btn-size);
+    height: var(--navbar-btn-size);
+    border: none;
+    background: transparent;
+    color: var(--navbar-color-white);
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform var(--navbar-duration-fast) var(--navbar-ease-smooth),
+        color var(--navbar-duration-fast) var(--navbar-ease-smooth);
+}
+
+.navbar-component-mobile-close-btn:hover {
+    transform: rotate(90deg);
+    color: var(--navbar-color-accent);
+}
+
+.navbar-component-mobile-nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    padding: 2rem;
+}
+
+.navbar-component-mobile-nav-item {
+    display: block;
+    padding: 1rem 2rem;
+    color: var(--navbar-color-text);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: var(--navbar-font-weight-medium);
+    transition: color var(--navbar-duration-fast) var(--navbar-ease-smooth);
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    min-width: 200px;
+}
+
+.navbar-component-mobile-nav-item:hover,
+.navbar-component-mobile-nav-item.active {
+    color: var(--navbar-color-white);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   7. MOBILE MARKER ANIMATION
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-mobile-marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--navbar-mobile-marker-width);
+    height: var(--navbar-mobile-marker-height);
+    background: linear-gradient(135deg, var(--navbar-color-accent), var(--navbar-color-accent-hover));
+    border-radius: var(--navbar-radius-md);
+    transition: all var(--navbar-duration-normal) var(--navbar-ease-bounce);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.navbar-component-mobile-marker.visible {
+    opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   8. RESUME BUTTONS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--navbar-color-accent), var(--navbar-color-accent-hover));
+    color: var(--navbar-color-white);
+    text-decoration: none;
+    border-radius: var(--navbar-radius-pill);
+    font-weight: var(--navbar-font-weight-medium);
+    transition: transform var(--navbar-duration-fast) var(--navbar-ease-smooth),
+        box-shadow var(--navbar-duration-fast) var(--navbar-ease-smooth);
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-component-resume-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--navbar-shadow-accent-color);
+}
+
+.navbar-component-resume-btn-mobile {
+    margin-top: 2rem;
+    font-size: 1.125rem;
+    padding: 1rem 2.5rem;
+}
+
+.navbar-component-resume-btn-compact {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.navbar-component-desktop-actions {
+    display: none;
+    align-items: center;
+}
+
+.navbar-component-resume-btn-desktop {
+    display: inline-flex;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   9. MOBILE CONTROLS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.navbar-component-mobile-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-component-hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--navbar-btn-size);
+    height: var(--navbar-btn-size);
+    background: transparent;
+    border: none;
+    color: var(--navbar-color-white);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform var(--navbar-duration-fast) var(--navbar-ease-smooth),
+        color var(--navbar-duration-fast) var(--navbar-ease-smooth);
+}
+
+.navbar-component-hamburger-btn:hover {
+    transform: scale(1.1);
+    color: var(--navbar-color-accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   10. DEMO SECTIONS (Remove when integrating)
+   ═══════════════════════════════════════════════████══════════════════ */
+
+.navbar-component-demo-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   11. RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .navbar-component-desktop-menu {
+        display: flex;
+    }
+
+    .navbar-component-mobile-controls {
+        display: none;
+    }
+
+    .navbar-component-desktop-actions {
+        display: flex;
+    }
+}
+
+/* Tablet & Mobile */
+@media (max-width: 1023px) {
+    .navbar-component-inner-container {
+        padding: 0 1.5rem;
+        height: 70px;
+    }
+
+    .navbar-component-brand {
+        font-size: 1.25rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .navbar-component-inner-container {
+        padding: 0 1rem;
+        height: 65px;
+    }
+
+    .navbar-component-brand {
+        font-size: 1.125rem;
+    }
+
+    .navbar-component-mobile-nav-item {
+        font-size: 1.25rem;
+        min-width: 180px;
+    }
+}

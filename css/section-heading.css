@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION HEADING COMPONENT - SHARED
+   Standardized heading style for all sections (About, Projects, etc.)
+   Based on Education Section Template
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+    /* Standardized Heading Variables (Default to Education Style) */
+    /* You can override these --section-heading-* vars in individual css files if unique colors are desired, 
+       but for a "constant" look, these defaults will apply. */
+
+    --section-heading-color-primary: #f59e0b;
+    /* Default Orange */
+    --section-heading-color-secondary: #6366f1;
+    /* Default Purple */
+
+    --section-heading-bg: linear-gradient(to right, var(--section-heading-color-primary), var(--section-heading-color-secondary));
+    --section-heading-padding: 1rem 2rem;
+    /* Derived from --education-space-md --education-space-xl */
+    --section-heading-radius: 0.5rem;
+    /* Derived from --education-radius-md */
+    --section-heading-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --section-heading-font-size: 2.5rem;
+    /* Derived from --education-font-size-2xl */
+    --section-heading-gap: 1rem;
+    /* Derived from --education-space-md */
+
+    --section-heading-text-color: #f8fafc;
+    /* Light text */
+    --section-heading-avatar-size: 120px;
+    --section-heading-avatar-border: 4px solid #0f172a;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HEADING WRAPPER
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.section-heading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--section-heading-bg);
+    border-radius: var(--section-heading-radius);
+    padding: var(--section-heading-padding);
+    color: var(--section-heading-text-color);
+    margin: 0 auto 3rem;
+    /* Standard bottom margin */
+    box-shadow: var(--section-heading-shadow);
+    max-width: fit-content;
+    gap: var(--section-heading-gap);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    /* Ensure consistent font */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HEADING ELEMENTS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.section-heading-icon {
+    font-size: var(--section-heading-font-size);
+    flex-shrink: 0;
+}
+
+.section-heading-title {
+    font-size: var(--section-heading-font-size);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    margin: 0;
+    color: var(--section-heading-text-color);
+}
+
+.section-heading-avatar {
+    width: var(--section-heading-avatar-size);
+    height: var(--section-heading-avatar-size);
+    border-radius: 100px;
+    /* Full radius */
+    object-fit: cover;
+    box-shadow: var(--section-heading-shadow);
+    border: var(--section-heading-avatar-border);
+    flex-shrink: 0;
+}

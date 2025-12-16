@@ -1,0 +1,14 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   🎨 LAYOUT STYLES
+   Contains common layout utility classes like containers, grids, etc.
+   Extracted from component CSS files.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.container {
+    width: 100%;
+    max-width: 1280px; /* Standardized from various component files */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem; /* A sensible default padding */
+    padding-right: 1.5rem;
+}

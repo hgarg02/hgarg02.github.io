@@ -1,0 +1,23 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   🎨 GLOBAL STYLES
+   Extracted from component CSS files to define base styling for the body
+   and common elements across the entire website.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Extracted from background-cursor.css */
+body {
+    background-color: var(--bg-color-background);
+    color: var(--bg-color-text-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    width: 100%;
+    cursor: none;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+}
