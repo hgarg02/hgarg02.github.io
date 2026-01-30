@@ -27,33 +27,38 @@ TABLE OF CONTENTS:
 1. CSS CUSTOM PROPERTIES (VARIABLES) - Scoped to Components
 ═══════════════════════════════════════════════════════════════════════ 
 */
+
 :root {
-  /* Colors */
-  --bg-color-primary: #6366f1;
-  --bg-color-secondary: #8b5cf6;
-  --bg-color-accent-gold: #f59e0b;
-  --bg-color-background: #0f172a;
+  /* Specific light shade */
   --bg-color-text-light: #e2e8f0;
 
-  /* RGB Values */
-  --bg-color-accent-gold-rgb: 245, 158, 11;
-  --bg-color-primary-rgb: 99, 102, 241;
-
-  /* Cursor Sizing */
+  /* ═══════════════════════════════════════════════════════════════════════
+     Cursor Sizing - INTENTIONAL FIXED VALUES
+     ═══════════════════════════════════════════════════════════════════════
+     These are the ONLY fixed-pixel values in the entire project.
+     Reasoning: Cursor must remain consistent across all viewport
+     sizes to prevent visual rendering bugs and maintain UX.
+     
+     Exception approved in: Project Overview Documentation
+     ═══════════════════════════════════════════════════════════════════════ */
   --bg-cursor-size-inner: 10px;
+  /* Inner dot - Fixed */
   --bg-cursor-size-outer: 40px;
+  /* Outer ring - Fixed */
   --bg-cursor-size-outer-hover: 60px;
+  /* Hover state - Fixed */
 
   /* Animation */
   --bg-transition-fast: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Effects */
-  --bg-radius-full: 50%;
-  --bg-z-cursor: 9999;
-  --bg-glow-accent-gold: 0 0 20px rgba(245, 158, 11, 0.8),
-    0 0 40px rgba(245, 158, 11, 0.4);
-  --bg-glow-primary: 0 0 25px rgba(99, 102, 241, 0.8),
-    0 0 50px rgba(99, 102, 241, 0.4);
+  --bg-border-radius-full: 50%;
+  --bg-z-cursor: var(--z-index-cursor);
+  --bg-glow-accent-gold: 0 0 20px rgba(6, 182, 212, 0.8),
+    0 0 40px rgba(6, 182, 212, 0.4);
+  --bg-glow-primary: 0 0 25px rgba(var(--color-primary-rgb), 0.8),
+    0 0 50px rgba(var(--color-primary-rgb), 0.4);
+
   /* Interactive States Colors */
   --bg-color-btn-start: #ff6b35;
   --bg-color-btn-end: #f7931e;
@@ -63,11 +68,11 @@ TABLE OF CONTENTS:
   --bg-color-link-end: #3b82f6;
   --bg-color-link-rgb: 6, 182, 212;
 
-  --bg-color-img-start: #ec4899;
-  --bg-color-img-end: #a855f7;
-  --bg-color-img-rgb: 236, 72, 153;
+  --bg-color-img-start: #a855f7;
+  --bg-color-img-end: #8b5cf6;
+  --bg-color-img-rgb: 168, 85, 247;
 
-  /* Interactive States Dimensions */
+  /* Interactive States Dimensions - Fixed */
   --bg-cursor-size-btn: 70px;
   --bg-cursor-size-link: 65px;
   --bg-cursor-size-img: 75px;
@@ -81,7 +86,7 @@ TABLE OF CONTENTS:
 
 /* Base reset and body styles */
 body {
-  background-color: var(--bg-color-background);
+  background-color: var(--color-background-dark);
   color: var(--bg-color-text-light);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
@@ -142,15 +147,15 @@ body {
   transform: translate(-50%, -50%);
   will-change: width, height, transform;
   display: none;
-  filter: drop-shadow(0 0 10px rgba(var(--bg-color-primary-rgb), var(--bg-opacity-low)));
+  filter: drop-shadow(0 0 10px rgba(var(--color-primary-rgb), var(--bg-opacity-low)));
 }
 
 /* Center Dot */
 .background-component-cursor-dot {
   width: var(--bg-cursor-size-inner);
   height: var(--bg-cursor-size-inner);
-  background: linear-gradient(135deg, var(--bg-color-accent-gold), var(--bg-color-btn-start));
-  border-radius: var(--bg-radius-full);
+  background: linear-gradient(135deg, var(--color-accent), var(--bg-color-btn-start));
+  border-radius: var(--bg-border-radius-full);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -178,20 +183,20 @@ body {
   height: var(--bg-cursor-size-outer);
   border: 2px solid transparent;
   background: linear-gradient(135deg,
-      var(--bg-color-accent-gold),
-      var(--bg-color-primary)) border-box;
+      var(--color-accent),
+      var(--color-primary)) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  border-radius: var(--bg-radius-full);
+  border-radius: var(--bg-border-radius-full);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0.8;
   transition: all var(--bg-transition-fast);
-  box-shadow: inset 0 0 15px rgba(var(--bg-color-accent-gold-rgb), var(--bg-opacity-low));
+  box-shadow: inset 0 0 15px rgba(var(--color-accent-rgb), var(--bg-opacity-low));
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -201,8 +206,8 @@ body {
 /* Active State (general hover) */
 .background-component-cursor-wrapper.active .background-component-cursor-dot {
   background: linear-gradient(135deg,
-      var(--bg-color-primary),
-      var(--bg-color-secondary));
+      var(--color-primary),
+      var(--color-secondary));
   box-shadow: var(--bg-glow-primary);
   transform: translate(-50%, -50%) scale(1.3);
 }
@@ -212,9 +217,9 @@ body {
   height: var(--bg-cursor-size-outer-hover);
   opacity: 1;
   background: linear-gradient(135deg,
-      var(--bg-color-primary),
-      var(--bg-color-secondary)) border-box;
-  box-shadow: var(--bg-glow-primary), inset 0 0 20px rgba(var(--bg-color-primary-rgb), var(--bg-opacity-med));
+      var(--color-primary),
+      var(--color-secondary)) border-box;
+  box-shadow: var(--bg-glow-primary), inset 0 0 20px rgba(var(--color-primary-rgb), var(--bg-opacity-med));
 }
 
 /* Button Hover State */
@@ -291,28 +296,16 @@ body {
    5. TRAIL PARTICLES & RIPPLE EFFECTS
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* Trail Container */
-#background-component-trail-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: var(--bg-z-cursor);
-}
-
-/* Trail Particles */
 .background-component-trail-particle {
   position: absolute;
   width: 8px;
   height: 8px;
-  background: radial-gradient(circle, var(--bg-color-accent-gold), transparent);
-  border-radius: var(--bg-radius-full);
+  background: radial-gradient(circle, var(--color-accent), transparent);
+  border-radius: var(--bg-border-radius-full);
   pointer-events: none;
   opacity: 0.7;
-  box-shadow: 0 0 12px rgba(var(--bg-color-accent-gold-rgb), 0.9),
-    0 0 24px rgba(var(--bg-color-accent-gold-rgb), 0.5);
+  box-shadow: 0 0 12px rgba(var(--color-accent-rgb), 0.9),
+    0 0 24px rgba(var(--color-accent-rgb), 0.5);
   animation: backgroundTrailFade 0.8s ease-out forwards;
 }
 
@@ -331,12 +324,12 @@ body {
 /* Click Ripple */
 .background-component-ripple {
   position: fixed;
-  border: 2px solid var(--bg-color-primary);
+  border: 2px solid var(--color-primary);
   border-radius: 50%;
   pointer-events: none;
   z-index: calc(var(--bg-z-cursor) - 1);
   animation: backgroundRipple 0.6s ease-out forwards;
-  box-shadow: 0 0 20px rgba(var(--bg-color-primary-rgb), 0.6);
+  box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.6);
 }
 
 @keyframes backgroundRipple {
@@ -374,12 +367,12 @@ body {
   font-size: 3rem;
   margin-bottom: 1rem;
   background: linear-gradient(135deg,
-      var(--bg-color-primary),
-      var(--bg-color-secondary));
+      var(--color-primary),
+      var(--color-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3);
 }
 
 .background-component-demo-content p {
@@ -396,8 +389,8 @@ body {
   display: inline-block;
   padding: 12px 30px;
   margin: 0.5rem;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.5);
+  background: rgba(var(--color-primary-rgb), 0.1);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.5);
   color: white;
   text-decoration: none;
   font-size: 1rem;
@@ -408,8 +401,8 @@ body {
 
 .background-component-demo-btn:hover,
 .background-component-demo-link:hover {
-  background: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+  background: rgba(var(--color-primary-rgb), 0.3);
+  box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.4);
   transform: translateY(-2px);
 }
 

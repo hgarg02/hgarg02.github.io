@@ -8,10 +8,6 @@
     /* ═══════════════════════════════════════════════════════════════════════
        IMPORTED VARIABLES (From User Snippet)
        ═══════════════════════════════════════════════════════════════════════ */
-    /* Fonts */
-    --skills-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --skills-font-weight-bold: 700;
-
     /* Transitions */
     --skills-duration-fast: 0.3s;
     --skills-duration-normal: 0.4s;
@@ -19,12 +15,11 @@
     --skills-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 
     /* Base Variables */
-    --skill-badge-theme-color: #333;
+    --skill-badge-theme-color: var(--color-background-surface-hover);
     /* Default, overridden by JS */
-    --skill-badge-neutral-border: #e0e0e0;
-    --skill-badge-bg: #fff;
 
-    --skill-badge-height: 64px;
+    /* Dimensions - Fluid */
+    --skill-badge-height: clamp(50px, 40px + 2vw, 64px);
     --skill-badge-border-width: 3px;
 
     /* Updated to use new smooth transition variables */
@@ -37,7 +32,7 @@
     transition: transform var(--skill-badge-transition), filter var(--skill-badge-transition);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 
-    font-family: var(--skills-font-family);
+    font-family: var(--font-body);
 }
 
 /* Hover: Lift and Glow */
@@ -64,9 +59,9 @@
     transition: background var(--skill-badge-transition);
 }
 
-/* Hover: Border becomes Neutral */
+/* Hover: Border becomes White */
 .skill-badge-wide:hover .skill-badge-squircle-box {
-    background: var(--skill-badge-neutral-border);
+    background: #fff;
 }
 
 /* Inner Content Layer */
@@ -79,7 +74,7 @@
     padding: 0 24px;
 
     /* Normal: White Background */
-    background: var(--skill-badge-bg);
+    background: var(--color-white);
 
     -webkit-clip-path: url(#dynamicSquircle);
     clip-path: url(#dynamicSquircle);
@@ -94,7 +89,7 @@
 
 /* Icon */
 .skill-badge-wide .skill-badge-icon {
-    font-size: 24px;
+    font-size: clamp(20px, 18px + 0.5vw, 24px);
     transition: transform var(--skill-badge-transition);
     /* No color override in normal state */
 }
@@ -108,7 +103,8 @@
 
 /* Text Label */
 .skill-badge-wide .skill-badge-label {
-    font-weight: var(--skills-font-weight-bold);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
     font-size: 0.95rem;
     white-space: nowrap;
     transition: color var(--skill-badge-transition);

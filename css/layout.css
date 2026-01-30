@@ -1,14 +1,83 @@
+@import url("variables.css");
+
 /* ═══════════════════════════════════════════════════════════════════════
    🎨 LAYOUT STYLES
-   Contains common layout utility classes like containers, grids, etc.
-   Extracted from component CSS files.
+   Common layout structures and container utilities.
    ═══════════════════════════════════════════════════════════════════════ */
 
 .container {
     width: 100%;
-    max-width: 1280px; /* Standardized from various component files */
+    max-width: var(--section-container-max-width);
+    /* Standardized max width */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.5rem; /* A sensible default padding */
-    padding-right: 1.5rem;
+
+    /* Fluid padding: scales from 16px (mobile) to 24px (desktop) automatically */
+    padding-left: var(--spacing-medium);
+    padding-right: var(--spacing-medium);
+}
+
+.section-padding {
+    /* Fluid vertical padding */
+    padding: var(--spacing-3x-large) 0;
+}
+
+/* Grid Utilities */
+.grid {
+    display: grid;
+    gap: var(--spacing-large);
+    /* Fluid gap */
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Flex Utilities */
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Responsive Utilities */
+/* Manual padding adjustments removed as --spacing-medium and --spacing-3x-large are now fluid clamps */
+
+@media (max-width: 1024px) {
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Safe Area Inset Support for Mobiles with Layout Logic */
+    .container {
+        padding-left: max(var(--spacing-medium), var(--safe-area-left, 0px));
+        padding-right: max(var(--spacing-medium), var(--safe-area-right, 0px));
+    }
 }

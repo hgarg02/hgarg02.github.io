@@ -1,97 +1,30 @@
 /* ═══════════════════════════════════════════════════════════════════════
-           🎨 CSS VARIABLES - Design System
-           ═══════════════════════════════════════════════════════════════════════ */
-@import url('section-heading.css');
+   🎨 CSS VARIABLES - Design System
+   ═══════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Colors */
-  --color-primary: #6366f1;
-  --color-primary-rgb: 99, 102, 241;
-  --color-secondary: #8b5cf6;
-  --color-accent-gold: #f59e0b;
-  --color-bg-base: #0f172a;
-  --color-bg-elevation: #1e293b;
-  --color-bg-glass-base: rgba(30, 41, 59, 0.6);
-  --color-bg-glass-hover: rgba(51, 65, 85, 0.75);
-  --color-border-subtle: rgba(255, 255, 255, 0.05);
-  --color-border-hover: rgba(255, 255, 255, 0.2);
-  --color-text-primary: #f8fafc;
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-white: #ffffff;
-
-  /* Spacing */
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 5rem;
-
-  /* Typography */
-  --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1rem;
-  --fs-lg: 1.125rem;
-  --fs-xl: 1.25rem;
-  --fs-xl: 1.25rem;
-  --fs-2xl: 2.5rem;
-  /* Updated to match education size */
-  --fs-3xl: 2.5rem;
-  /* Added for consistency if needed */
-  --fw-normal: 400;
-  --fw-medium: 500;
-  --fw-semibold: 600;
-  --fw-bold: 700;
-  --lh-relaxed: 1.75;
-
-  /* Effects */
-  --glass-blur: 10px;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-full: 9999px;
-
-  /* Transitions */
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-  /* Shadows */
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --glow-primary: 0 0 40px rgba(99, 102, 241, 0.25);
-
-  /* Layout & Dimensions */
-  --container-max-width: 1280px;
-  --project-avatar-size: 120px;
-  --project-arrow-size: 45px;
-  --project-dot-size: 12px;
-
-  /* Feature Colors */
-  --color-purple-accent: #a855f7;
+  /* Layout & Dimensions - Fluid */
+  --project-section-avatar-size: var(--avatar-size-lg);
+  --project-section-arrow-size: clamp(36px, 30px + 1vw, 45px);
+  --project-section-dot-size: 12px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-           🎨 DEMO PAGE STYLING
-           ═══════════════════════════════════════════════════════════════════════ */
+   🎨 DEMO PAGE STYLING
+   ═══════════════════════════════════════════════════════════════════════ */
 
 .project-section {
-  padding: var(--space-3xl) 0;
+  padding: var(--section-container-padding-y) 0;
   width: 100%;
 }
 
 .project-section-container {
-  max-width: var(--container-max-width);
+  max-width: var(--section-container-max-width);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--section-container-padding-x);
 }
 
-.project-cards-container {
+.project-section-cards-container {
   width: 100%;
 }
 
@@ -110,43 +43,44 @@
 }
 
 .margin-bottom-spacing-large {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--spacing-2x-large);
   /* or increase if you want more separation */
 }
 
 /* ---------------------------
-            PROJECT FILTER BUTTONS
-           ----------------------------*/
-.project-filters {
+   PROJECT FILTER BUTTONS
+   ----------------------------*/
+.project-section-filters {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--spacing-medium);
   flex-wrap: wrap;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--spacing-2x-large);
 }
 
-.project-filter-btn {
+.project-section-filter-btn {
   padding: 0.6rem 1.4rem;
   background: rgba(var(--color-primary-rgb), 0.12);
   border: 1px solid rgba(var(--color-primary-rgb), 0.25);
-  color: var(--color-text-primary);
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
-  border-radius: var(--radius-full);
+  color: var(--color-text-main);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-full);
   cursor: pointer;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  transition: all var(--transition-normal);
+  transition: all var(--duration-300) var(--ease-out);
 }
 
-.project-filter-btn:hover {
+.project-section-filter-btn:hover {
   background: var(--color-primary);
   color: var(--color-white);
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(var(--color-primary-rgb), 0.3);
 }
 
-.project-filter-btn.active {
+.project-section-filter-btn.active {
   background: linear-gradient(135deg,
       var(--color-primary),
       var(--color-secondary));
@@ -160,21 +94,22 @@
            🎨 PROJECT CARD - Glass Effect with Cursor Glow
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-card {
+.project-section-card {
   position: relative;
-  background: var(--color-bg-glass-base);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  background: var(--color-background-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 2px solid var(--color-border-subtle);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  transition: all var(--transition-normal);
+  border-radius: var(--border-radius-extra-large);
+  padding: var(--spacing-extra-large);
+  transition: all var(--duration-400) var(--ease-out-quart);
   overflow: hidden;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--spacing-2x-large);
+  will-change: transform, box-shadow, border-color;
 }
 
 /* Top accent border (expands on hover) */
-.project-card::before {
+.project-section-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -183,16 +118,16 @@
   height: 4px;
   background: linear-gradient(90deg,
       var(--color-primary),
-      var(--color-accent-gold));
+      var(--color-accent));
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform var(--transition-slow);
+  transition: transform var(--duration-500) var(--ease-in-out);
   pointer-events: none;
   z-index: 2;
 }
 
 /* Cursor-following glow effect */
-.project-card::after {
+.project-section-card::after {
   content: "";
   position: absolute;
   top: var(--mouse-y, 50%);
@@ -205,25 +140,24 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--transition-fast);
+  transition: opacity var(--duration-200) var(--ease-out);
   border-radius: 50%;
   z-index: 0;
 }
 
 /* Hover effects */
-.project-card:hover {
+.project-section-card:hover {
   transform: translateY(-8px);
   border-color: var(--color-primary);
-  background: var(--color-bg-glass-hover);
-  box-shadow: var(--shadow-xl), var(--glow-primary),
-    0 0 80px rgba(var(--color-primary-rgb), 0.2);
+  box-shadow: 0 0 40px rgba(var(--color-primary-rgb), 0.2);
+  background: var(--color-background-glass-heavy);
 }
 
-.project-card:hover::before {
+.project-section-card:hover::before {
   transform: scaleX(1);
 }
 
-.project-card:hover::after {
+.project-section-card:hover::after {
   opacity: 1;
 }
 
@@ -231,26 +165,26 @@
            🎨 CARD INNER GRID LAYOUT
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-card-inner {
+.project-section-card-inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-lg);
+  gap: var(--spacing-large);
   position: relative;
   z-index: 1;
 }
 
 /* Desktop: Two columns (Info left, Carousel right) */
 @media (min-width: 992px) {
-  .project-card-inner {
+  .project-section-card-inner {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-2xl);
+    gap: var(--spacing-2x-large);
   }
 
-  .project-info-column {
+  .project-section-info-column {
     order: 1;
   }
 
-  .project-carousel-column {
+  .project-section-carousel-column {
     order: 2;
   }
 }
@@ -259,26 +193,26 @@
            🎨 PROJECT INFO COLUMN (Left on Desktop)
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-info-column {
+.project-section-info-column {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--spacing-medium);
   order: 2;
   /* Below carousel on mobile */
 }
 
-.project-title {
-  font-size: var(--fs-2xl);
-  font-weight: var(--fw-bold);
-  color: var(--color-text-primary);
+.project-section-card-title {
+  font-size: var(--font-size-2x-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
   margin: 0;
   line-height: 1.2;
 }
 
-.project-description {
-  font-size: var(--fs-base);
+.project-section-card-description {
+  font-size: var(--font-size-base);
   color: var(--color-text-secondary);
-  line-height: var(--lh-relaxed);
+  line-height: var(--line-height-relaxed);
   margin: 0;
 }
 
@@ -286,23 +220,23 @@
            🎨 TECH STACK TAGS
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-tech-stack {
+.project-section-card-tech-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-sm);
+  gap: var(--spacing-small);
+  margin-top: var(--spacing-small);
 }
 
 .tech-badge {
   display: inline-block;
   background: rgba(var(--color-primary-rgb), 0.1);
   color: var(--color-primary);
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-full);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-extra-small) var(--spacing-medium);
+  border-radius: var(--border-radius-full);
   border: 1px solid rgba(var(--color-primary-rgb), 0.2);
-  transition: all var(--transition-normal);
+  transition: all var(--duration-200) var(--ease-out-back);
   cursor: default;
 }
 
@@ -314,14 +248,14 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-           🎨 CTA BUTTONS (Primary & Secondary with Animations)
-           ═══════════════════════════════════════════════════════════════════════ */
+   🎨 CTA BUTTONS (Primary & Secondary with Animations)
+   ═══════════════════════════════════════════════════════════════════════ */
 
-.project-actions {
+.project-section-card-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
+  gap: var(--spacing-medium);
+  margin-top: var(--spacing-large);
 }
 
 /* Base button styles */
@@ -329,20 +263,22 @@
   border: none;
   text-decoration: none;
   cursor: pointer;
-  font-family: inherit;
-  font-weight: var(--fw-semibold);
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-semibold);
   text-align: center;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
-  border-radius: var(--radius-md);
+  gap: var(--spacing-extra-small);
+  border-radius: var(--border-radius-medium);
   padding: 0.75rem 2rem;
-  font-size: var(--fs-base);
+  font-size: var(--font-size-base);
   position: relative;
   overflow: hidden;
   z-index: 1;
-  transition: all var(--transition-slow);
+  transition: all var(--about-transition-slow);
+  /* Assuming about-transition-slow is not defined here, fallback to local or standard */
+  transition: all var(--duration-500);
   outline: none;
   user-select: none;
 }
@@ -352,20 +288,17 @@
   outline-offset: 2px;
 }
 
-/* Primary Button (Filled with Gradient) */
+/* Primary Button (Starts Outline, Fills on Hover) */
 .cta-btn--primary {
-  background: linear-gradient(135deg,
-      var(--color-primary),
-      var(--color-purple-accent),
-      var(--color-secondary),
-      var(--color-primary));
-  background-size: 300% 100%;
-  color: white;
-  box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  box-shadow: none;
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* Shine effect */
+/* Shine effect for Primary (Visible on Hover) */
 .cta-btn--primary::before {
   content: "";
   position: absolute;
@@ -378,33 +311,68 @@
       rgba(255, 255, 255, 0.3),
       transparent);
   transform: skewX(-25deg);
-  transition: left 0.7s;
+  transition: left 0.7s var(--ease-in-out);
   z-index: -1;
+  /* Above background (z-2), below text */
 }
 
 .cta-btn--primary:hover::before {
   left: 150%;
 }
 
+/* Fill animation for Primary */
+.cta-btn--primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+      var(--color-primary),
+      var(--color-secondary),
+      var(--color-secondary),
+      var(--color-primary));
+  background-size: 300% 100%;
+  transition: transform var(--duration-300) var(--ease-bounce);
+  transform: scaleX(0);
+  transform-origin: right;
+  z-index: -2;
+}
+
+.cta-btn--primary:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .cta-btn--primary:hover {
-  transform: translateY(-3px) scale(1.02);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(var(--color-primary-rgb), 0.5);
-  background-position: 100% 0;
 }
 
 .cta-btn--primary:active {
-  transform: translateY(-1px) scale(0.98);
+  transform: translateY(-1px);
 }
 
-/* Secondary Button (Outlined with Fill Animation) */
+/* Secondary Button (Starts Filled, Outlines on Hover) */
 .cta-btn--secondary {
   background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  box-shadow: none;
+  color: white;
+  /* Matches original Primary text color */
+  border: 2px solid transparent;
+  /* Reserving space to match hover state */
+  box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
+  /* Matches original Primary shadow */
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* Fill from left animation */
+/* Shine effect for Secondary (Disabled to prevent clash with unfill) */
+/* .cta-btn--secondary::before { ... } */
+
+/* Fill background for Secondary (Starts Visible) */
 .cta-btn--secondary::after {
   content: "";
   position: absolute;
@@ -415,22 +383,25 @@
   background: linear-gradient(135deg,
       var(--color-primary),
       var(--color-secondary));
-  transition: transform var(--transition-bounce);
-  transform: scaleX(0);
-  transform-origin: right;
-  z-index: -1;
+  transition: transform var(--duration-300) var(--ease-bounce);
+  transform: scaleX(1);
+  /* Starts filled */
+  transform-origin: left;
+  z-index: -2;
 }
 
 .cta-btn--secondary:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  transform: scaleX(0);
+  /* Unfills on hover */
+  transform-origin: right;
 }
 
 .cta-btn--secondary:hover {
-  color: white;
-  border-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.25);
+  box-shadow: none;
+  /* Reverts to original secondary no-shadow style */
 }
 
 .cta-btn--secondary:active {
@@ -441,7 +412,7 @@
 .cta-btn i {
   display: inline-block;
   font-size: 1.1em;
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform var(--duration-500) var(--ease-bounce);
 }
 
 .cta-btn:hover i.bi-box-arrow-up-right {
@@ -456,7 +427,7 @@
            🎨 CAROUSEL COLUMN (Right on Desktop)
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-carousel-column {
+.project-section-carousel-column {
   position: relative;
   padding: 0 3.5rem;
   /* Space for external arrows */
@@ -465,7 +436,7 @@
 }
 
 /* Splide container */
-.project-carousel-column .splide {
+.project-section-carousel-column .splide {
   height: 100%;
   min-height: 250px;
   max-height: 400px;
@@ -473,67 +444,67 @@
   /* Allow arrows outside */
 }
 
-.project-carousel-column .splide__track,
-.project-carousel-column .splide__list,
-.project-carousel-column .splide__slide {
+.project-section-carousel-column .splide__track,
+.project-section-carousel-column .splide__list,
+.project-section-carousel-column .splide__slide {
   height: 100%;
 }
 
-.project-carousel-column .splide__track {
-  border-radius: var(--radius-lg);
+.project-section-carousel-column .splide__track {
+  border-radius: var(--border-radius-large);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  background-color: var(--color-bg-elevation);
+  box-shadow: var(--box-shadow-medium);
+  background-color: var(--color-background-elevated);
 }
 
-.project-carousel-column img {
+.project-section-carousel-column img {
   width: 100%;
   height: 100%;
   max-height: 400px;
   object-fit: cover;
   object-position: center;
   display: block;
-  border-radius: var(--radius-lg);
+  border-radius: var(--border-radius-large);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
            🎨 SPLIDE CUSTOM ARROWS (Glassmorphic, External)
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-carousel-column .splide__arrow {
-  background: var(--color-bg-glass-base);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+.project-section-carousel-column .splide__arrow {
+  background: var(--color-background-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 2px solid var(--color-border-subtle);
-  border-radius: var(--radius-full);
-  width: var(--project-arrow-size);
-  height: var(--project-arrow-size);
+  border-radius: var(--border-radius-full);
+  width: var(--project-section-arrow-size);
+  height: var(--project-section-arrow-size);
   opacity: 1;
-  transition: all var(--transition-normal);
-  box-shadow: var(--shadow-md);
+  transition: all var(--duration-200) var(--ease-out);
+  box-shadow: var(--box-shadow-medium);
 }
 
-.project-carousel-column .splide__arrow:hover {
+.project-section-carousel-column .splide__arrow:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  box-shadow: var(--shadow-lg), var(--glow-primary);
+  box-shadow: var(--box-shadow-large), var(--box-shadow-glow-primary);
 }
 
-.project-carousel-column .splide__arrow svg {
-  fill: var(--color-text-primary);
-  transition: fill var(--transition-fast);
+.project-section-carousel-column .splide__arrow svg {
+  fill: var(--color-text-main);
+  transition: fill var(--duration-200) var(--ease-out);
 }
 
-.project-carousel-column .splide__arrow:hover svg {
+.project-section-carousel-column .splide__arrow:hover svg {
   fill: var(--color-white);
 }
 
 /* Position arrows outside */
-.project-carousel-column .splide__arrow--prev {
+.project-section-carousel-column .splide__arrow--prev {
   left: -3rem;
 }
 
-.project-carousel-column .splide__arrow--next {
+.project-section-carousel-column .splide__arrow--next {
   right: -3rem;
 }
 
@@ -541,26 +512,26 @@
            🎨 SPLIDE PAGINATION DOTS
            ═══════════════════════════════════════════════════════════════════════ */
 
-.project-carousel-column .splide__pagination {
+.project-section-carousel-column .splide__pagination {
   bottom: -2rem;
   padding: 0;
 }
 
-.project-carousel-column .splide__pagination__page {
-  background: var(--color-bg-glass-base);
+.project-section-carousel-column .splide__pagination__page {
+  background: var(--color-background-glass);
   border: 2px solid var(--color-border-subtle);
-  width: var(--project-dot-size);
-  height: var(--project-dot-size);
-  transition: all var(--transition-normal);
+  width: var(--project-section-dot-size);
+  height: var(--project-section-dot-size);
+  transition: all var(--duration-300) var(--ease-out);
 }
 
-.project-carousel-column .splide__pagination__page.is-active {
+.project-section-carousel-column .splide__pagination__page.is-active {
   background: var(--color-primary);
   border-color: var(--color-primary);
   transform: scale(1.3);
 }
 
-.project-carousel-column .splide__pagination__page:hover {
+.project-section-carousel-column .splide__pagination__page:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
 }
@@ -571,11 +542,11 @@
 
 /* Tablet */
 @media (max-width: 991px) {
-  .project-card-inner {
-    gap: var(--space-lg);
+  .project-section-card-inner {
+    gap: var(--spacing-large);
   }
 
-  .project-carousel-column {
+  .project-section-carousel-column {
     padding: 0 3rem;
   }
 }
@@ -583,20 +554,20 @@
 /* Mobile */
 @media (max-width: 768px) {
   .project-section-container {
-    padding: 0 var(--space-md);
+    padding: 0 var(--spacing-medium);
   }
 
-  .project-card {
-    padding: var(--space-lg);
+  .project-section-card {
+    padding: var(--spacing-large);
   }
 
-  .project-info-column {
+  .project-section-info-column {
     text-align: center;
     align-items: center;
   }
 
   .project-section-heading-title {
-    font-size: var(--fs-xl);
+    font-size: var(--font-size-extra-large);
   }
 
   .project-section-heading-avatar {
@@ -604,62 +575,62 @@
     height: 80px;
   }
 
-  .project-description {
-    font-size: var(--fs-sm);
+  .project-section-card-description {
+    font-size: var(--font-size-small);
   }
 
-  .project-tech-stack {
+  .project-section-card-tech-stack {
     justify-content: center;
   }
 
-  .project-actions {
+  .project-section-card-actions {
     justify-content: center;
     flex-direction: column;
     width: 100%;
   }
 
-  .project-actions .cta-btn {
+  .project-section-card-actions .cta-btn {
     width: 100%;
   }
 
-  .project-carousel-column {
+  .project-section-carousel-column {
     padding: 0 2.5rem;
   }
 
-  .project-carousel-column .splide__arrow--prev {
+  .project-section-carousel-column .splide__arrow--prev {
     left: -2rem;
   }
 
-  .project-carousel-column .splide__arrow--next {
+  .project-section-carousel-column .splide__arrow--next {
     right: -2rem;
   }
 }
 
 /* Small mobile */
 @media (max-width: 480px) {
-  .project-card {
-    padding: var(--space-md);
+  .project-section-card {
+    padding: var(--spacing-medium);
   }
 
-  .project-carousel-column {
+  .project-section-carousel-column {
     padding: 0 2rem;
   }
 
-  .project-carousel-column .splide {
+  .project-section-carousel-column .splide {
     min-height: 200px;
     max-height: 300px;
   }
 
-  .project-carousel-column .splide__arrow {
+  .project-section-carousel-column .splide__arrow {
     width: 36px;
     height: 36px;
   }
 
-  .project-carousel-column .splide__arrow--prev {
+  .project-section-carousel-column .splide__arrow--prev {
     left: -1.5rem;
   }
 
-  .project-carousel-column .splide__arrow--next {
+  .project-section-carousel-column .splide__arrow--next {
     right: -1.5rem;
   }
 }

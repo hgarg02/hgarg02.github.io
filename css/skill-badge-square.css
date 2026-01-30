@@ -8,31 +8,21 @@
     /* ═══════════════════════════════════════════════════════════════════════
        IMPORTED VARIABLES (From User Snippet)
        ═══════════════════════════════════════════════════════════════════════ */
-    /* Fonts */
-    --skills-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --skills-font-weight-bold: 700;
-
     /* Transitions */
     --skills-duration-fast: 0.3s;
     --skills-duration-normal: 0.4s;
     --skills-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
     --skills-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* Spacing */
-    --skills-space-sm: 0.75rem;
-
     /* Base Variables */
-    --skill-badge-theme-color: #333;
+    --skill-badge-theme-color: var(--color-background-surface-hover);
     /* Default, overridden by JS */
-    --skill-badge-neutral-border: #e0e0e0;
-    --skill-badge-bg: #fff;
 
-    /* Dimensions & Sizing (Explicit for Scaling) */
-    --skill-badge-size: 80px;
-    --skill-badge-inner-size: 75px;
+    /* Dimensions & Sizing - Fluid */
+    --skill-badge-size: clamp(60px, 50px + 3vw, 80px);
+    --skill-badge-inner-size: calc(var(--skill-badge-size) - 5px);
     --skill-badge-border-width: 3px;
-    --skill-badge-icon-size: 30px;
-    --skill-badge-label-size: 0.6rem;
+    --skill-badge-icon-size: clamp(30px, 26px + 1.4vw, 40px);
 
     /* Updated to use new smooth transition variables */
     --skill-badge-transition: var(--skills-duration-normal) var(--skills-ease-smooth);
@@ -45,8 +35,9 @@
     cursor: pointer;
     transition: transform var(--skill-badge-transition), filter var(--skill-badge-transition);
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    will-change: transform, filter;
 
-    font-family: var(--skills-font-family);
+    font-family: var(--font-body);
 }
 
 /* Hover: Lift and Glow */
@@ -71,9 +62,9 @@
     clip-path: url(#squircleClip);
 }
 
-/* Hover: Border becomes Neutral */
+/* Hover: Border becomes White */
 .skill-badge-square:hover .skill-badge-squircle-box {
-    background: var(--skill-badge-neutral-border);
+    background: #fff;
 }
 
 /* Inner Content Layer */
@@ -87,7 +78,7 @@
     transition: background var(--skill-badge-transition);
 
     /* Normal: White Background */
-    background: var(--skill-badge-bg);
+    background: var(--color-white);
 
     -webkit-clip-path: url(#squircleClip);
     clip-path: url(#squircleClip);
@@ -103,12 +94,13 @@
     font-size: var(--skill-badge-icon-size);
     transition: all var(--skill-badge-transition);
     z-index: 2;
+    opacity: 1;
     /* Normal: Authentic color (inherited/set by class) */
 }
 
 /* Hover: Icon becomes White (High Contrast) */
 .skill-badge-square:hover .skill-badge-icon {
-    transform: translateY(-10px) scale(0.8);
+    transform: translateY(-10px) scale(0.75);
     /* Filter to turn any colored icon to white */
     filter: brightness(0) invert(1);
     color: #fff !important;
@@ -119,9 +111,9 @@
 .skill-badge-square .skill-badge-label {
     position: absolute;
     bottom: 6px;
-    font-family: var(--skills-font-family);
-    font-size: var(--skill-badge-label-size);
-    font-weight: var(--skills-font-weight-bold);
+    font-family: var(--font-display);
+    font-size: var(--font-size-extra-small);
+    font-weight: var(--font-weight-bold);
     opacity: 0;
     z-index: 1;
     text-align: center;
@@ -138,4 +130,25 @@
     opacity: 1;
     transform: translateY(-2px);
     color: #fff;
+}
+
+/* For Jenkins SVG icon */
+.skill-badge-square.jenkins .skill-badge-icon {
+    font-size: unset;
+    /* cancel font-size */
+    width: var(--skill-badge-icon-size);
+    height: var(--skill-badge-icon-size);
+    object-fit: contain;
+    filter: none;
+    /* reset filters for normal state */
+    color: inherit;
+    /* no forced color */
+}
+
+/* Hover effect for Jenkins SVG */
+.skill-badge-square.jenkins:hover .skill-badge-icon {
+    transform: translateY(-10px) scale(0.75);
+    filter: brightness(0) invert(1);
+    /* keep white color effect on hover */
+    color: #fff !important;
 }
