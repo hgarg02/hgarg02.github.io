@@ -16,8 +16,8 @@
     // ═══════════════════════════════════════════════════════════════════
 
     const CONFIG = {
-        selector: '.experience-scroll-reveal',
-        activeClass: 'experience-scroll-reveal-active',
+        selector: '.experience-section-scroll-reveal',
+        activeClass: 'experience-section-scroll-reveal-active',
         threshold: 0.15,
         rootMargin: '0px 0px -50px 0px'
     };
@@ -34,7 +34,7 @@
 
     function initExperienceComponent() {
         initScrollReveal();
-        console.log('✅ Experience component initialized - Scroll Reveal active');
+        Logger.info('✅ Experience component initialized - Scroll Reveal active');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -44,7 +44,7 @@
     function initScrollReveal() {
         // Check for reduced motion preference (accessibility)
         if (prefersReducedMotion()) {
-            console.log('ℹ️ Reduced motion detected: Scroll animations disabled');
+            Logger.info('ℹ️ Reduced motion detected: Scroll animations disabled');
             makeAllVisible();
             return;
         }
@@ -72,7 +72,7 @@
         // Observe all elements
         elements.forEach(el => observer.observe(el));
 
-        console.log(`✅ Scroll reveal initialized (${elements.length} elements)`);
+        Logger.info(`✅ Scroll reveal initialized (${elements.length} elements)`);
     }
 
     // ═══════════════════════════════════════════════════════════════════

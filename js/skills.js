@@ -27,7 +27,7 @@
 
     function initSkillsSection() {
         initCarouselHoverPause();
-        console.log('✅ Skills section component initialized');
+        Logger.info('✅ Skills section component initialized');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -61,7 +61,7 @@
             });
         });
 
-        console.log(`✅ Skills: Initialized ${carouselWrappers.length} carousels`);
+        Logger.info(`✅ Skills: Initialized ${carouselWrappers.length} carousels`);
     }
 
 })();

@@ -26,7 +26,7 @@
 
     function initFooterSection() {
         updateCopyrightYear();
-        console.log('✅ Footer section component initialized');
+        Logger.info('✅ Footer section component initialized');
     }
 
     // ═══════════════════════════════════════════════════════════════════

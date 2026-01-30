@@ -51,7 +51,7 @@
         initTypewriter();
         initCodeWindowTheme();
         initControlButtons();
-        console.log('✅ Hero section initialized');
+        Logger.info('✅ Hero section initialized');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -70,8 +70,15 @@
         let charIndex = 0;
         let isDeleting = false;
         let typingSpeed = CONFIG.typewriter.typingSpeed;
+        let timeoutId = null;
 
         function typeEffect() {
+            // Memory Leak Fix: Check if element still exists
+            if (!document.contains(typewriterElement)) {
+                if (timeoutId) clearTimeout(timeoutId);
+                return;
+            }
+
             const currentPhrase = CONFIG.typewriter.phrases[phraseIndex];
 
             // Typing mode
@@ -97,12 +104,17 @@
                     : CONFIG.typewriter.pauseBeforeType;
             }
 
-            setTimeout(typeEffect, typingSpeed);
+            timeoutId = setTimeout(typeEffect, typingSpeed);
         }
 
         // Start the typewriter effect
         typeEffect();
-        console.log('✅ Typewriter effect initialized');
+        Logger.info('✅ Typewriter effect initialized');
+
+        // Return cleanup function (can be used by a global manager if needed)
+        return () => {
+            if (timeoutId) clearTimeout(timeoutId);
+        };
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -122,7 +134,7 @@
             codeWindow.classList.toggle('dark-theme');
         });
 
-        console.log('✅ Code window theme toggle initialized');
+        Logger.info('✅ Code window theme toggle initialized');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -147,7 +159,7 @@
             });
         });
 
-        console.log('✅ Control buttons initialized');
+        Logger.info('✅ Control buttons initialized');
     }
 
 })();

@@ -35,7 +35,7 @@
         initScrollSpy();
         initSmoothScroll();
         initNavbarScrollReveal();
-        console.log('✅ Navbar component initialized');
+        Logger.info('✅ Navbar component initialized');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -52,21 +52,36 @@
             return;
         }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // When hero is NOT in view, show navbar
-                if (!entry.isIntersecting) {
-                    navbar.classList.add('visible');
-                } else {
-                    // When hero IS in view, hide navbar
-                    navbar.classList.remove('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
+        // Use scroll event with better threshold calculation
+        let ticking = false;
+
+        function updateNavbarVisibility() {
+            const heroBottom = heroSection.getBoundingClientRect().bottom;
+            const navbarHeight = navbar.offsetHeight;
+
+            // Show navbar when hero section is scrolled past (minus buffer)
+            // Using 50% of navbar height as buffer
+            if (heroBottom < navbarHeight * 0.5) {
+                navbar.classList.add('visible');
+            } else {
+                // When hero IS in view, hide navbar
+                navbar.classList.remove('visible');
+            }
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateNavbarVisibility();
+                });
+                ticking = true;
+            }
         });
 
-        observer.observe(heroSection);
+        // Initial check
+        updateNavbarVisibility();
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -85,12 +100,14 @@
         openBtn.addEventListener('click', () => {
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            openBtn.setAttribute('aria-expanded', 'true');
         });
 
         // Close overlay
         const closeOverlay = () => {
             overlay.classList.remove('active');
             document.body.style.overflow = '';
+            openBtn.setAttribute('aria-expanded', 'false');
         };
 
         closeBtn.addEventListener('click', closeOverlay);
@@ -223,29 +240,38 @@
         });
     }
 
+    let currentActiveSectionId = null;
+
     function updateActiveLinks(sectionId) {
+        // Check if already active to prevent unnecessary updates
+        if (currentActiveSectionId === sectionId) return;
+        currentActiveSectionId = sectionId;
+
         const allLinks = document.querySelectorAll('.navbar-component-scroll-link');
         const desktopMarker = document.querySelector('.navbar-component-desktop-marker');
         const mobileMarker = document.querySelector('.navbar-component-mobile-marker');
 
-        allLinks.forEach(link => {
-            const isActive = link.getAttribute('href') === `#${sectionId}`;
+        // Batch DOM reads and writes using requestAnimationFrame
+        requestAnimationFrame(() => {
+            allLinks.forEach(link => {
+                const isActive = link.getAttribute('href') === `#${sectionId}`;
 
-            if (isActive) {
-                link.classList.add('active');
+                if (isActive) {
+                    link.classList.add('active');
 
-                // Update desktop marker
-                if (link.classList.contains('navbar-component-nav-link') && desktopMarker) {
-                    updateMarker(link, desktopMarker);
+                    // Update desktop marker
+                    if (link.classList.contains('navbar-component-nav-link') && desktopMarker) {
+                        updateMarker(link, desktopMarker);
+                    }
+
+                    // Update mobile marker
+                    if (link.classList.contains('navbar-component-mobile-nav-item') && mobileMarker) {
+                        updateMobileMarker(link, mobileMarker);
+                    }
+                } else {
+                    link.classList.remove('active');
                 }
-
-                // Update mobile marker
-                if (link.classList.contains('navbar-component-mobile-nav-item') && mobileMarker) {
-                    updateMobileMarker(link, mobileMarker);
-                }
-            } else {
-                link.classList.remove('active');
-            }
+            });
         });
     }
 

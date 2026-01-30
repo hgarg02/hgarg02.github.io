@@ -37,8 +37,8 @@
         }
 
         initCounterAnimation(section);
-        initImageHeightSync(section);
-        console.log('✅ About section component initialized');
+        // initImageHeightSync(section); // Handled by CSS Grid
+        Logger.info('✅ About section component initialized');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -64,7 +64,8 @@
 
                 if (count < target) {
                     count += increment;
-                    counter.innerText = Math.ceil(count) + "+";
+                    const displayValue = Math.min(Math.ceil(count), target);
+                    counter.innerText = displayValue + "+";
                     requestAnimationFrame(updateCount);
                 } else {
                     counter.innerText = target + "+";
@@ -93,39 +94,7 @@
     // IMAGE HEIGHT SYNCHRONIZATION (Desktop only)
     // ═══════════════════════════════════════════════════════════════════
 
-    function initImageHeightSync(context) {
-        const leftColumn = context.querySelector(".about-section-left-column");
-        const imageWrapper = context.querySelector(".about-section-image-wrapper");
-
-        if (!leftColumn || !imageWrapper) {
-            console.warn('⚠️ About section: Required elements for image sync not found');
-            return;
-        }
-
-        function syncImageHeight() {
-            // Mobile/Tablet - use auto height
-            if (window.innerWidth <= 1024) {
-                imageWrapper.style.height = "auto";
-                imageWrapper.style.maxHeight = "none";
-                return;
-            }
-
-            // Desktop - sync heights
-            const leftHeight = leftColumn.offsetHeight;
-            imageWrapper.style.height = leftHeight + "px";
-            imageWrapper.style.maxHeight = leftHeight + "px";
-        }
-
-        // Debounced resize handler for better performance
-        let resizeTimeout;
-        const debouncedSync = () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(syncImageHeight, 150);
-        };
-
-        // Initialize and attach event listener
-        syncImageHeight();
-        window.addEventListener("resize", debouncedSync);
-    }
+    // Removed: Image height sync is now handled by CSS Grid in about.css
+    // using align-items: stretch and min-height rules.
 
 })();

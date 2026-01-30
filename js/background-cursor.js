@@ -33,6 +33,11 @@
             cellSize: 60,
             lineWidth: 1,
             speed: 0.1
+        },
+        colors: {
+            primary: 'rgba(99, 102, 241, 0.3)', // Fallback
+            secondary: 'rgba(139, 92, 246, 0.2)', // Fallback
+            particle: 'rgba(139, 92, 246, 0.8)' // Fallback
         }
     };
 
@@ -47,11 +52,27 @@
     }
 
     function initBackgroundComponent() {
+        updateConfigColors();
+
         if (CONFIG.cursor.enabled) {
             initCustomCursor();
         }
         initCanvasBackgrounds();
-        console.log('✅ Background & Cursor component initialized');
+        Logger.info('✅ Background & Cursor component initialized');
+    }
+
+    function updateConfigColors() {
+        const rootStyles = getComputedStyle(document.documentElement);
+        const primaryRgb = rootStyles.getPropertyValue('--color-primary-rgb').trim();
+        const secondaryRgb = rootStyles.getPropertyValue('--color-secondary-rgb').trim();
+
+        if (primaryRgb) {
+            CONFIG.colors.primary = `rgba(${primaryRgb}, 0.3)`;
+        }
+        if (secondaryRgb) {
+            CONFIG.colors.secondary = `rgba(${secondaryRgb}, 0.2)`;
+            CONFIG.colors.particle = `rgba(${secondaryRgb}, 0.8)`;
+        }
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -140,6 +161,22 @@
     }
 
     // ═══════════════════════════════════════════════════════════════════
+    // UTILITIES
+    // ═══════════════════════════════════════════════════════════════════
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
     // CANVAS BACKGROUNDS
     // ═══════════════════════════════════════════════════════════════════
 
@@ -158,6 +195,7 @@
 
         const ctx = canvas.getContext('2d');
         let offset = 0;
+        let animationFrameId;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -166,13 +204,11 @@
 
         function drawGrid() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(99, 102, 241, 0.3)';
+            ctx.strokeStyle = CONFIG.colors.primary;
             ctx.lineWidth = CONFIG.grid.lineWidth;
 
             // Vertical lines
-            for (let
-
-                x = -offset; x < canvas.width; x += CONFIG.grid.cellSize) {
+            for (let x = -offset; x < canvas.width; x += CONFIG.grid.cellSize) {
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
                 ctx.lineTo(x, canvas.height);
@@ -188,12 +224,18 @@
             }
 
             offset = (offset + CONFIG.grid.speed) % CONFIG.grid.cellSize;
-            requestAnimationFrame(drawGrid);
+            animationFrameId = requestAnimationFrame(drawGrid);
         }
 
         resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+
+        // Optimize: Debounce resize event
+        window.addEventListener('resize', debounce(resizeCanvas, 250));
+
         drawGrid();
+
+        // Cleanup (if needed in future)
+        // return () => cancelAnimationFrame(animationFrameId);
     }
 
     // ───────────────────────────────────────────────────────────────────
@@ -206,6 +248,7 @@
 
         const ctx = canvas.getContext('2d');
         let particles = [];
+        let animationFrameId;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -245,19 +288,30 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw connecting lines
-            ctx.strokeStyle = 'rgba(139, 92, 246, 0.2)';
+            ctx.strokeStyle = CONFIG.colors.secondary;
             ctx.lineWidth = 1;
+
+            // Optimize: Pre-calculate squared distance to avoid Math.sqrt inside loop
+            const connectionDistSq = CONFIG.particles.connectionDistance * CONFIG.particles.connectionDistance;
 
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < CONFIG.particles.connectionDistance) {
+                    // Optimization: Check squared distance first
+                    const distSq = dx * dx + dy * dy;
+
+                    if (distSq < connectionDistSq) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
+
+                        // Only calculate sqrt if we are drawing keyframe (needed for opacity)
+                        // Or use approximation/linear fallback for alpha if extreme optimization needed
+                        // But Sqrt is fine here since we already filtered out 90% of cases
+                        const dist = Math.sqrt(distSq);
+
                         ctx.globalAlpha = 1 - (dist / CONFIG.particles.connectionDistance);
                         ctx.stroke();
                     }
@@ -266,7 +320,7 @@
 
             // Draw particles
             ctx.globalAlpha = 1;
-            ctx.fillStyle = 'rgba(139, 92, 246, 0.8)';
+            ctx.fillStyle = CONFIG.colors.particle;
             particles.forEach(p => {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -277,11 +331,14 @@
         function animate() {
             updateParticles();
             drawParticles();
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
         }
 
         resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+
+        // Optimize: Debounce resize event
+        window.addEventListener('resize', debounce(resizeCanvas, 250));
+
         animate();
     }
 

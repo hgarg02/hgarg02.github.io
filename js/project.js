@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tracks mouse position and updates CSS custom properties
     // ═══════════════════════════════════════════════════════════════════
 
-    const projectCards = document.querySelectorAll('.project-card');
+    const projectCards = document.querySelectorAll('.project-section-card');
 
     projectCards.forEach(card => {
         // Throttle mousemove for better performance
@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }).mount();
         });
 
-        console.log(`✅ Initialized ${carousels.length} project carousel(s)`);
+        Logger.info(`✅ Initialized ${carousels.length} project carousel(s)`);
     } else if (carousels.length > 0) {
-        console.warn('⚠️ Splide library not loaded');
+        Logger.warn('⚠️ Splide library not loaded');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Filter projects by category
     // ═══════════════════════════════════════════════════════════════════
 
-    const filterBtns = document.querySelectorAll(".project-filter-btn");
-    const cards = document.querySelectorAll(".project-card");
+    const filterBtns = document.querySelectorAll(".project-section-filter-btn");
+    const cards = document.querySelectorAll(".project-section-card");
 
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        console.log(`✅ Project filters initialized (${filterBtns.length} filters)`);
+        Logger.info(`✅ Project filters initialized (${filterBtns.length} filters)`);
     }
 
-    console.log('✅ Project section initialized');
+    Logger.info('✅ Project section initialized');
 });
