@@ -12,11 +12,13 @@
          Load external resources first for better performance
          ═══════════════════════════════════════════════════════════════════ -->
 
-    <!-- Google Fonts (Syne for headings, Inter for body) -->
+    <!-- Google Fonts - 6-Font Typography System -->
+    <!-- Momo Signature (logo), Unbounded (headings), Space Grotesk (metrics), 
+         Plus Jakarta Sans (UI), Syne (entities), Inter (body), JetBrains Mono (code/dates) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Syne:wght@700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Momo+Signature&family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@400;500;700&family=Unbounded:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Bootstrap Icons (for UI icons and menu) -->
@@ -38,6 +40,7 @@
     <link rel="stylesheet" href="./css/reset.css"> <!-- Browser Reset / Normalize -->
     <link rel="stylesheet" href="./css/global.css"> <!-- Global Typography & Base Styles -->
     <link rel="stylesheet" href="./css/layout.css"> <!-- Layout Utilities & Grid System -->
+    <link rel="stylesheet" href="./css/section-heading.css"> <!-- Shared Section Heading Styles -->
 
     <!-- ═══════════════════════════════════════════════════════════════════
          BACKGROUND & CURSOR SYSTEM
@@ -82,7 +85,9 @@
     <div id="background-component-trail-container"></div>
 
     <!-- Mobile Overlay Menu -->
-    <div class="navbar-component-mobile-overlay" id="navbar-component-mobile-overlay">
+    <div class="navbar-component-mobile-overlay" id="navbar-component-mobile-overlay" role="dialog" aria-modal="true"
+        aria-labelledby="mobile-menu-title">
+        <h2 id="mobile-menu-title" class="sr-only">Mobile Navigation Menu</h2>
         <button class="navbar-component-mobile-close-btn" id="navbar-component-mobile-close-btn"
             aria-label="Close Menu">&times;</button>
 
@@ -99,26 +104,35 @@
             <a href="#section_7" class="navbar-component-mobile-nav-item navbar-component-scroll-link">Contact</a>
 
             <a href="resume.pdf" class="navbar-component-resume-btn navbar-component-resume-btn-mobile" download>
-                <i class="bi bi-cloud-arrow-down-fill"></i> Resume
+                <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i> RESUME
             </a>
         </div>
     </div>
 
     <!-- Main Navbar -->
-    <nav class="navbar-component-wrapper" id="navbar-component-navbar">
+    <nav class="navbar-component-wrapper" id="navbar-component-navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-component-inner-container">
 
             <!-- Brand/Logo -->
-            <a href="#section_1" class="navbar-component-brand navbar-component-scroll-link">First</a>
+            <a href="#section_1" class="navbar-component-brand navbar-component-scroll-link"
+                aria-label="Harsh Garg Portfolio Home">
+                <div class="navbar-logo-wrapper">
+                    <div class="navbar-logo-circle">
+                        <span class="navbar-logo-text">HG</span>
+                    </div>
+                    <div class="navbar-logo-glow"></div>
+                </div>
+            </a>
 
             <!-- Mobile Controls -->
             <div class="navbar-component-mobile-controls">
                 <a class="navbar-component-resume-btn navbar-component-resume-btn-compact" href="resume.pdf" download>
-                    <i class="bi bi-cloud-arrow-down-fill"></i> Resume
+                    <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i> Resume
                 </a>
                 <button class="navbar-component-hamburger-btn" id="navbar-component-hamburger-btn"
-                    aria-label="Open Menu">
-                    <i class="bi bi-list"></i>
+                    aria-label="Open navigation menu" aria-expanded="false"
+                    aria-controls="navbar-component-mobile-overlay">
+                    <i class="bi bi-list" aria-hidden="true"></i>
                 </button>
             </div>
 
@@ -160,7 +174,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero-section" id="section_1">
+    <section class="hero-section" id="section_1" aria-labelledby="hero-heading">
         <div class="hero-section-container">
 
             <!-- LEFT COLUMN: Hero Content -->
@@ -173,8 +187,9 @@
                 </div>
 
                 <!-- Main Greeting with Waving Emoji -->
-                <h1 class="hero-section-left-column-title">
-                    Hi <span class="hero-section-left-column-title-emoji">👋</span> I'm<br>Harsh Garg
+                <h1 id="hero-heading" class="hero-section-left-column-title">
+                    Hi <span class="hero-section-left-column-title-emoji" aria-label="waving hand" role="img">👋</span>
+                    I'm<br>Harsh Garg
                 </h1>
 
                 <!-- Typewriter Text with Blinking Cursor -->
@@ -235,21 +250,28 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
+        <!-- Scroll Indicator (Clickable, Bottom Center of Hero) -->
+        <a href="#section_2" class="hero-section-scroll-indicator navbar-component-scroll-link"
+            aria-label="Scroll to About section">
+            <div class="hero-section-scroll-indicator-mouse">
+                <div class="hero-section-scroll-indicator-wheel"></div>
+            </div>
+            <span class="hero-section-scroll-indicator-text">Scroll Down</span>
+        </a>
     </section>
 
     <!-- ABOUT SECTION -->
-    <section class="about-section" id="section_2">
+    <section class="about-section" id="section_2" aria-labelledby="about-heading">
         <div class="about-section-container">
 
             <!--═══════════════════════════════════════════════════════════════════
                 HEADING SECTION - STANDARDIZED
                 ═══════════════════════════════════════════════════════════════════ -->
             <div class="section-heading-wrapper">
-                <i class="bi bi-person-circle section-heading-icon"></i>
-                <h2 class="section-heading-title">About Me</h2>
                 <img src="https://picsum.photos/160" class="section-heading-avatar" alt="Profile Avatar" loading="lazy">
+                <h2 class="section-heading-title" id="about-heading">About Me</h2>
             </div>
 
             <!--═══════════════════════════════════════════════════════════════════
@@ -321,16 +343,15 @@
     </section>
 
     <!-- PROJECT SECTION -->
-    <section class="project-section" id="section_3">
+    <section class="project-section" id="section_3" aria-labelledby="projects-heading">
         <div class="project-section-container">
 
             <!-- ═══════════════════════════════════════════════════════════════════
                  HEADING SECTION
                  ═══════════════════════════════════════════════════════════════════ -->
             <div class="section-heading-wrapper">
-                <i class="bi bi-briefcase section-heading-icon"></i>
-                <h2 class="section-heading-title">Projects</h2>
                 <img src="https://picsum.photos/160" class="section-heading-avatar" alt="Profile Avatar" loading="lazy">
+                <h2 class="section-heading-title" id="projects-heading">Projects</h2>
             </div>
 
             <!-- ═══════════════════════════════════════════════════════════════════
@@ -339,29 +360,29 @@
             <div class="project-section-content-wrapper">
 
                 <!-- PROJECT FILTER BUTTONS -->
-                <div class="project-filters text-center mb-5">
-                    <button class="project-filter-btn active" data-filter="all">All</button>
-                    <button class="project-filter-btn" data-filter="fullstack">Full Stack</button>
-                    <button class="project-filter-btn" data-filter="frontend">Frontend</button>
-                    <button class="project-filter-btn" data-filter="backend">Backend</button>
-                    <button class="project-filter-btn" data-filter="mobile">Mobile</button>
+                <div class="project-section-filters text-center mb-5">
+                    <button class="project-section-filter-btn active" data-filter="all">All</button>
+                    <button class="project-section-filter-btn" data-filter="fullstack">Full Stack</button>
+                    <button class="project-section-filter-btn" data-filter="frontend">Frontend</button>
+                    <button class="project-section-filter-btn" data-filter="backend">Backend</button>
+                    <button class="project-section-filter-btn" data-filter="mobile">Mobile</button>
                 </div>
 
-                <div class="project-cards-container">
+                <div class="project-section-cards-container">
 
                     <!-- Project Card 1: E-Commerce Platform -->
-                    <article class="project-card" data-category="fullstack">
-                        <div class="project-card-inner">
+                    <article class="project-section-card" data-category="fullstack">
+                        <div class="project-section-card-inner">
                             <!-- Info Column (Left on Desktop) -->
-                            <div class="project-info-column">
-                                <h3 class="project-title">🛒 E-Commerce Platform</h3>
-                                <p class="project-description">
+                            <div class="project-section-info-column">
+                                <h3 class="project-section-card-title">E-Commerce Platform</h3>
+                                <p class="project-section-card-description">
                                     A full-featured e-commerce solution with real-time inventory management,
                                     secure payment processing, and responsive UI. Built with Spring Boot microservices
                                     architecture and React for the frontend.
                                 </p>
                                 <!-- Tech Stack -->
-                                <div class="project-tech-stack">
+                                <div class="project-section-card-tech-stack">
                                     <div class="skill-badge-square java">
                                         <div class="skill-badge-squircle-box">
                                             <div class="skill-badge-squircle-content">
@@ -413,7 +434,7 @@
                                     </div>
                                 </div>
                                 <!-- CTA Buttons -->
-                                <div class="project-actions">
+                                <div class="project-section-card-actions">
                                     <a href="#" class="cta-btn cta-btn--primary" aria-label="View Demo" target="_blank"
                                         rel="noopener noreferrer">
                                         <i class="bi bi-box-arrow-up-right"></i>
@@ -427,7 +448,7 @@
                                 </div>
                             </div>
                             <!-- Carousel Column (Right on Desktop) -->
-                            <div class="project-carousel-column">
+                            <div class="project-section-carousel-column">
                                 <div class="splide" aria-label="E-Commerce Platform Screenshots">
                                     <div class="splide__track">
                                         <ul class="splide__list">
@@ -451,17 +472,18 @@
                     </article>
 
                     <!-- Project Card 2: Task Management App -->
-                    <article class="project-card" data-category="fullstack frontend">
-                        <div class="project-card-inner">
-                            <div class="project-info-column">
-                                <h3 class="project-title">📋 Task Management System</h3>
-                                <p class="project-description">
+                    <article class="project-section-card" data-category="fullstack frontend">
+                        <div class="project-section-card-inner">
+                            <div class="project-section-info-column">
+                                <h3 class="project-section-card-title">Task Management System</h3>
+                                <p class="project-section-card-description">
                                     Collaborative task manager with real-time updates, drag-and-drop functionality,
                                     and team collaboration features. Powered by Node.js, Express, and Vue.js with
                                     WebSocket
                                     integration.
                                 </p>
-                                <div class="project-tech-stack">
+                                <!-- Tech Stack -->
+                                <div class="project-section-card-tech-stack">
                                     <div class="skill-badge-square node">
                                         <div class="skill-badge-squircle-box">
                                             <div class="skill-badge-squircle-content">
@@ -498,13 +520,14 @@
                                     <div class="skill-badge-square websockets">
                                         <div class="skill-badge-squircle-box">
                                             <div class="skill-badge-squircle-content">
-                                                <i class="skill-badge-icon bi bi-hdd-network"></i>
+                                                <i class="skill-badge-icon devicon-socketio-original colored"></i>
                                                 <span class="skill-badge-label">SOCKETS</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="project-actions">
+                                <!-- Card cta buttons -->
+                                <div class="project-section-card-actions">
                                     <a href="#" class="cta-btn cta-btn--primary" aria-label="View Demo" target="_blank"
                                         rel="noopener noreferrer">
                                         <i class="bi bi-box-arrow-up-right"></i>
@@ -517,7 +540,8 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="project-carousel-column">
+                            <!-- Carousel -->
+                            <div class="project-section-carousel-column">
                                 <div class="splide" aria-label="Task Management Screenshots">
                                     <div class="splide__track">
                                         <ul class="splide__list">
@@ -537,25 +561,74 @@
                     </article>
 
                     <!-- Project Card 3: Cloud Native Platform -->
-                    <article class="project-card" data-category="backend cloud">
-                        <div class="project-card-inner">
-                            <div class="project-info-column">
-                                <h3 class="project-title">☁️ Cloud Native Ecosystem</h3>
-                                <p class="project-description">
+                    <article class="project-section-card" data-category="backend cloud">
+                        <div class="project-section-card-inner">
+                            <div class="project-section-info-column">
+                                <h3 class="project-section-card-title">Cloud Native Ecosystem</h3>
+                                <p class="project-section-card-description">
                                     Enterprise-grade microservices platform featuring service discovery, load balancing,
                                     centralized configuration, and distributed tracing. Deployed on Kubernetes with
                                     CI/CD
                                     automation.
                                 </p>
-                                <div class="project-tech-stack">
-                                    <span class="tech-badge">Java</span>
-                                    <span class="tech-badge">Spring Cloud</span>
-                                    <span class="tech-badge">Kubernetes</span>
-                                    <span class="tech-badge">Docker</span>
-                                    <span class="tech-badge">Jenkins</span>
-                                    <span class="tech-badge">AWS</span>
+                                <!-- Tech Stack -->
+                                <!-- Tech Stack -->
+                                <div class="project-section-card-tech-stack">
+                                    <div class="skill-badge-square java">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-java-plain colored"></i>
+                                                <span class="skill-badge-label">JAVA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square spring">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-spring-plain colored"></i>
+                                                <span class="skill-badge-label">SPRING</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square kubernetes">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-kubernetes-plain colored"></i>
+                                                <span class="skill-badge-label">K8S</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square docker">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i class="skill-badge-icon devicon-docker-plain colored"></i>
+                                                <span class="skill-badge-label">DOCKER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-badge-square jenkins">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <img class="skill-badge-icon"
+                                                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-line.svg"
+                                                    alt="Jenkins Icon" />
+                                                <span class="skill-badge-label">JENKINS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-badge-square aws">
+                                        <div class="skill-badge-squircle-box">
+                                            <div class="skill-badge-squircle-content">
+                                                <i
+                                                    class="skill-badge-icon devicon-amazonwebservices-plain-wordmark colored"></i>
+                                                <span class="skill-badge-label">AWS</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="project-actions">
+                                <!-- Card cta buttons -->
+                                <div class="project-section-card-actions">
                                     <a href="#" class="cta-btn cta-btn--primary" aria-label="View Documentation"
                                         target="_blank" rel="noopener noreferrer">
                                         <i class="bi bi-box-arrow-up-right"></i>
@@ -569,7 +642,7 @@
                                 </div>
                             </div>
 
-                            <div class="project-carousel-column">
+                            <div class="project-section-carousel-column">
                                 <div class="splide" aria-label="Cloud Platform Screenshots">
                                     <div class="splide__track">
                                         <ul class="splide__list">
@@ -597,7 +670,7 @@
     </section>
 
     <!-- EXPERIENCE SECTION -->
-    <section class="experience-section" id="section_4">
+    <section class="experience-section" id="section_4" aria-labelledby="experience-heading">
         <div class="experience-section-container">
 
             <!-- ═══════════════════════════════════════════════════════════════════════
@@ -605,10 +678,9 @@
                     ═══════════════════════════════════════════════════════════════════════ -->
             <div class="experience-scroll-reveal">
                 <div class="section-heading-wrapper">
-                    <i class="bi bi-briefcase section-heading-icon"></i>
-                    <h2 class="section-heading-title">Experience</h2>
                     <img src="https://picsum.photos/160" class="section-heading-avatar" alt="Profile Avatar"
                         loading="lazy">
+                    <h2 class="section-heading-title" id="experience-heading">Experience</h2>
                 </div>
             </div>
 
@@ -619,27 +691,29 @@
                 <!-- ═══════════════════════════════════════════════════════════════════════
                     TIMELINE (Alternating Left/Right Layout)
                     ═══════════════════════════════════════════════════════════════════════ -->
-                <div class="timeline experience-scroll-reveal">
+                <div class="experience-section-timeline experience-section-scroll-reveal">
 
                     <!-- Timeline Item 1 (Right Side) -->
-                    <div class="timeline-item timeline-item-right">
-                        <div class="timeline-item-content">
-                            <span class="timeline-item-date">2023 - Present</span>
-                            <div class="experience-card">
-                                <div class="experience-card-header">
-                                    <div class="experience-card-meta">
-                                        <div class="experience-card-logo-wrapper">
-                                            <img src="https://picsum.photos/seed/meta/512" alt="Meta"
-                                                class="experience-card-logo" loading="lazy">
+                    <div class="experience-section-timeline-item experience-section-timeline-item-right">
+                        <div class="experience-section-timeline-item-content">
+                            <span class="experience-section-timeline-item-date">2023 - Present</span>
+                            <div class="experience-section-card">
+                                <div class="experience-section-card-header">
+                                    <div class="experience-section-card-meta">
+                                        <div class="experience-section-card-logo-wrapper">
+                                            <a href="https://cdnlogo.com/logo/meta-platforms_144435.html">
+                                                <img src="https://static.cdnlogo.com/logos/m/30/meta-platforms_800.png"
+                                                    alt="Meta" class="experience-section-card-logo" loading="lazy">
+                                            </a>
                                         </div>
                                         <div>
-                                            <h3 class="experience-card-title">Lead Java Developer</h3>
-                                            <h4 class="experience-card-company">Meta</h4>
-                                            <span class="experience-card-location">San Francisco, CA</span>
+                                            <h3 class="experience-section-card-title">Lead Java Developer</h3>
+                                            <h4 class="experience-section-card-company">META</h4>
+                                            <span class="experience-section-card-location">San Francisco, CA</span>
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="experience-card-details">
+                                <ul class="experience-section-card-details">
                                     <li>Leading the architecture and development of next-generation microservices
                                         platforms
                                         using Spring Boot and Spring Cloud.</li>
@@ -650,7 +724,7 @@
                                         improve
                                         development workflow and deployment.</li>
                                 </ul>
-                                <div class="experience-card-techstack">
+                                <div class="experience-section-card-tech-stack">
                                     <div class="skill-badge-square java">
                                         <div class="skill-badge-squircle-box">
                                             <div class="skill-badge-squircle-content">
@@ -689,24 +763,26 @@
                     </div>
 
                     <!-- Timeline Item 2 (Left Side)-->
-                    <div class="timeline-item timeline-item-left">
-                        <div class="timeline-item-content">
-                            <span class="timeline-item-date">2021 - 2022</span>
-                            <div class="experience-card">
-                                <div class="experience-card-header">
-                                    <div class="experience-card-meta">
-                                        <div class="experience-card-logo-wrapper">
-                                            <img src="https://picsum.photos/seed/google/512" alt="Google"
-                                                class="experience-card-logo" loading="lazy">
+                    <div class="experience-section-timeline-item experience-section-timeline-item-left">
+                        <div class="experience-section-timeline-item-content">
+                            <span class="experience-section-timeline-item-date">2021 - 2022</span>
+                            <div class="experience-section-card">
+                                <div class="experience-section-card-header">
+                                    <div class="experience-section-card-meta">
+                                        <div class="experience-section-card-logo-wrapper">
+                                            <a href="https://cdnlogo.com/logo/google-icon_129578.html">
+                                                <img src="https://static.cdnlogo.com/logos/g/38/google-icon.svg"
+                                                    alt="Google" class="experience-section-card-logo" loading="lazy">
+                                            </a>
                                         </div>
                                         <div>
-                                            <h3 class="experience-card-title">Software Engineer</h3>
-                                            <h4 class="experience-card-company">Google</h4>
-                                            <span class="experience-card-location">San Francisco, CA</span>
+                                            <h3 class="experience-section-card-title">Software Engineer</h3>
+                                            <h4 class="experience-section-card-company">GOOGLE</h4>
+                                            <span class="experience-section-card-location">San Francisco, CA</span>
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="experience-card-details">
+                                <ul class="experience-section-card-details">
                                     <li>Responsible for end-to-end development of enterprise-level web applications.
                                     </li>
                                     <li>Built robust backend services using Java and the Spring Framework.</li>
@@ -714,7 +790,7 @@
                                     <li>Performed database design and optimization.</li>
                                     <li>Implemented real-time features using WebSockets to enhance user experience.</li>
                                 </ul>
-                                <div class="experience-card-techstack">
+                                <div class="experience-section-card-tech-stack">
                                     <div class="skill-badge-square java">
                                         <div class="skill-badge-squircle-box">
                                             <div class="skill-badge-squircle-content">
@@ -753,24 +829,26 @@
                     </div>
 
                     <!-- Timeline Item 3 (Right Side) -->
-                    <div class="timeline-item timeline-item-right">
-                        <div class="timeline-item-content">
-                            <span class="timeline-item-date">2020 - 2021</span>
-                            <div class="experience-card">
-                                <div class="experience-card-header">
-                                    <div class="experience-card-meta">
-                                        <div class="experience-card-logo-wrapper">
-                                            <img src="https://picsum.photos/seed/amazon/512" alt="Amazon"
-                                                class="experience-card-logo" loading="lazy">
+                    <div class="experience-section-timeline-item experience-section-timeline-item-right">
+                        <div class="experience-section-timeline-item-content">
+                            <span class="experience-section-timeline-item-date">2020 - 2021</span>
+                            <div class="experience-section-card">
+                                <div class="experience-section-card-header">
+                                    <div class="experience-section-card-meta">
+                                        <div class="experience-section-card-logo-wrapper">
+                                            <a href="https://cdnlogo.com/logo/amazon-icon_144965.html">
+                                                <img src="https://static.cdnlogo.com/logos/a/86/amazon-icon_800.png"
+                                                    alt="Amazon" class="experience-section-card-logo" loading="lazy">
+                                            </a>
                                         </div>
                                         <div>
-                                            <h3 class="experience-card-title">Associate Software Engineer</h3>
-                                            <h4 class="experience-card-company">Amazon</h4>
-                                            <span class="experience-card-location">San Francisco, CA</span>
+                                            <h3 class="experience-section-card-title">Associate Software Engineer</h3>
+                                            <h4 class="experience-section-card-company">AMAZON</h4>
+                                            <span class="experience-section-card-location">San Francisco, CA</span>
                                         </div>
                                     </div>
                                 </div>
-                                <ul class="experience-card-details">
+                                <ul class="experience-section-card-details">
                                     <li>Contributed to the development of minimum viable products (MVPs) in an agile
                                         environment.</li>
                                     <li>Gained hands-on experience with Java, Spring, React, and relational databases.
@@ -781,7 +859,7 @@
                                     <li>Developed a solid foundation in software engineering principles and practices.
                                     </li>
                                 </ul>
-                                <div class="experience-card-techstack">
+                                <div class="experience-section-card-tech-stack">
                                     <div class="skill-badge-square java">
                                         <div class="skill-badge-squircle-box">
                                             <div class="skill-badge-squircle-content">
@@ -824,19 +902,15 @@
     </section>
 
     <!-- SKILLS SECTION -->
-    <section class="skills-section" id="section_5">
+    <section class="skills-section" id="section_5" aria-labelledby="skills-heading">
         <div class="skills-section-container">
-            <!-- ═══════════════════════════════════════════════════════════════════
-                    HEADING SECTION
-                    ═══════════════════════════════════════════════════════════════════ -->
             <!-- ═══════════════════════════════════════════════════════════════════
                     HEADING SECTION - STANDARDIZED
                     ═══════════════════════════════════════════════════════════════════ -->
             <div class="section-heading-wrapper">
-                <i class="bi bi-tools section-heading-icon"></i>
-                <h2 class="section-heading-title">Technical Skills</h2>
                 <img src="https://picsum.photos/seed/skills/160" class="section-heading-avatar" alt="Skills Avatar"
                     loading="lazy">
+                <h2 class="section-heading-title" id="skills-heading">Technical Skills</h2>
             </div>
             <!-- ═══════════════════════════════════════════════════════════════════
                  SECTION CONTENT
@@ -1204,17 +1278,16 @@
     </section>
 
     <!-- EDUCATION SECTION -->
-    <section class="education-section" id="section_6">
+    <section class="education-section" id="section_6" aria-labelledby="education-heading">
         <div class="education-section-container">
 
             <!-- ═══════════════════════════════════════════════════════════════════════
                  SECTION HEADING
                  ═══════════════════════════════════════════════════════════════════════ -->
             <div class="section-heading-wrapper">
-                <i class="bi bi-mortarboard section-heading-icon"></i>
-                <h2 class="section-heading-title">Education & Certifications</h2>
                 <img src="https://picsum.photos/seed/education/160" class="section-heading-avatar"
                     alt="Education Avatar" loading="lazy" />
+                <h2 class="section-heading-title" id="education-heading">Education & Certifications</h2>
             </div>
 
             <!-- ═══════════════════════════════════════════════════════════════════════
@@ -1234,19 +1307,19 @@
                         <div class="education-section-education-card">
                             <h4 class="education-card-title-degree">Master of Science in Computer Science</h4>
                             <div class="education-card-meta-details">
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-institute">
                                     <i class="bi bi-building education-card-meta-detail-icon"></i>
                                     <a href="#" title="Visit Stanford University website">Stanford University</a>
                                 </span>
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-location">
                                     <i class="bi bi-geo-alt-fill education-card-meta-detail-icon"></i>
                                     Stanford, CA
                                 </span>
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-year">
                                     <i class="bi bi-calendar-event education-card-meta-detail-icon"></i>
                                     2018
                                 </span>
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-grade">
                                     <i class="bi bi-award-fill education-card-meta-detail-icon"></i>
                                     GPA: 3.9/4.0
                                 </span>
@@ -1257,48 +1330,25 @@
                         <div class="education-section-education-card">
                             <h4 class="education-card-title-degree">Bachelor of Science in Software Engineering</h4>
                             <div class="education-card-meta-details">
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-institute">
                                     <i class="bi bi-building education-card-meta-detail-icon"></i>
                                     <a href="#" title="Visit UT Austin website">University of Texas at Austin</a>
                                 </span>
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-location">
                                     <i class="bi bi-geo-alt-fill education-card-meta-detail-icon"></i>
                                     Austin, TX
                                 </span>
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-year">
                                     <i class="bi bi-calendar-event education-card-meta-detail-icon"></i>
                                     2016
                                 </span>
-                                <span class="education-card-meta-detail-item">
+                                <span class="education-card-meta-detail-grade">
                                     <i class="bi bi-award-fill education-card-meta-detail-icon"></i>
                                     GPA: 3.8/4.0
                                 </span>
                             </div>
                         </div>
 
-                        <!-- Education Card 3 -->
-                        <div class="education-section-education-card">
-                            <h4 class="education-card-title-degree">Diploma in Web Development</h4>
-                            <div class="education-card-meta-details">
-                                <span class="education-card-meta-detail-item">
-                                    <i class="bi bi-building education-card-meta-detail-icon"></i>
-                                    <a href="#" title="Visit Technical Training Center website">Technical Training
-                                        Center</a>
-                                </span>
-                                <span class="education-card-meta-detail-item">
-                                    <i class="bi bi-geo-alt-fill education-card-meta-detail-icon"></i>
-                                    Online / Remote
-                                </span>
-                                <span class="education-card-meta-detail-item">
-                                    <i class="bi bi-calendar-event education-card-meta-detail-icon"></i>
-                                    2015 - 2016
-                                </span>
-                                <span class="education-card-meta-detail-item">
-                                    <i class="bi bi-award-fill education-card-meta-detail-icon"></i>
-                                    Grade: Distinction
-                                </span>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- RIGHT COLUMN: Certifications -->
@@ -1333,54 +1383,18 @@
                                 </div>
                                 <div class="certification-card-meta-details">
                                     <h5 class="certification-card-certificate-title">Oracle Certified Professional Java
-                                        SE
-                                        11
+                                        SE 11
                                         Developer</h5>
-                                    <p class="certification-card-certificate-issuer">Oracle University</p>
-                                    <p class="certification-card-certificate-year">2023</p>
+                                    <p class="certification-card-certificate-issuer">
+                                        <i class="bi bi-building"></i>
+                                        Oracle University
+                                    </p>
+                                    <p class="certification-card-certificate-year">
+                                        <i class="bi bi-calendar-event"></i>
+                                        2023
+                                    </p>
                                     <a href="#" class="certification-card-certificate-view-link"
                                         title="View Oracle certification">
-                                        View Credential
-                                        <i class="bi bi-box-arrow-up-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Certification Card 3 -->
-                        <div class="education-section-certification-card">
-                            <div class="education-section-certification-card-flex-layout">
-                                <div class="certification-card-certificate-icon">
-                                    <i class="bi bi-patch-check-fill"></i>
-                                </div>
-                                <div class="certification-card-meta-details">
-                                    <h5 class="certification-card-certificate-title">Certified Kubernetes Administrator
-                                        (CKA)
-                                    </h5>
-                                    <p class="certification-card-certificate-issuer">The Linux Foundation</p>
-                                    <p class="certification-card-certificate-year">2023</p>
-                                    <a href="#" class="certification-card-certificate-view-link"
-                                        title="View CKA certification">
-                                        View Credential
-                                        <i class="bi bi-box-arrow-up-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Certification Card 4 -->
-                        <div class="education-section-certification-card">
-                            <div class="education-section-certification-card-flex-layout">
-                                <div class="certification-card-certificate-icon">
-                                    <i class="bi bi-patch-check-fill"></i>
-                                </div>
-                                <div class="certification-card-meta-details">
-                                    <h5 class="certification-card-certificate-title">Spring Professional Certification
-                                    </h5>
-                                    <p class="certification-card-certificate-issuer">Spring Academy</p>
-                                    <p class="certification-card-certificate-year">2022</p>
-                                    <a href="#" class="certification-card-certificate-view-link"
-                                        title="View Spring certification">
                                         View Credential
                                         <i class="bi bi-box-arrow-up-right"></i>
                                     </a>
@@ -1395,7 +1409,7 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section class="contact-section" id="section_7">
+    <section class="contact-section" id="section_7" aria-labelledby="contact-heading">
         <div class="contact-section-container">
 
             <!-- ═══════════════════════════════════════════════════════════════════
@@ -1405,10 +1419,9 @@
                  HEADING SECTION - STANDARDIZED
                  ═══════════════════════════════════════════════════════════════════ -->
             <div class="section-heading-wrapper">
-                <i class="bi bi-envelope section-heading-icon"></i>
-                <h2 class="section-heading-title">Contact Me</h2>
                 <img src="https://picsum.photos/seed/contact/160" class="section-heading-avatar" alt="Contact Avatar"
                     loading="lazy">
+                <h2 class="section-heading-title" id="contact-heading">Contact Me</h2>
             </div>
 
             <!-- ═══════════════════════════════════════════════════════════════════
@@ -1421,26 +1434,27 @@
                 <div class="contact-section-cards-row">
 
                     <!-- Email Card -->
-                    <div class="contact-section-email-card" tabindex="0">
+                    <div class="contact-section-email-card" tabindex="0" role="link"
+                        aria-label="Send email to your.email@example.com">
                         <div class="contact-section-email-icon">
-                            <i class="bi bi-envelope-fill"></i>
+                            <i class="bi bi-envelope-fill" aria-hidden="true"></i>
                         </div>
                         <div class="contact-section-email-content">
                             <h3 class="contact-section-email-label">Email</h3>
-                            <a href="mailto:your.email@example.com" class="contact-section-email-value">
+                            <a href="mailto:your.email@example.com" class="contact-section-email-value" tabindex="-1">
                                 your.email@example.com
                             </a>
                         </div>
                     </div>
 
                     <!-- Phone Card -->
-                    <div class="contact-section-phone-card" tabindex="0">
+                    <div class="contact-section-phone-card" tabindex="0" role="link" aria-label="Call 1 (234) 567-8900">
                         <div class="contact-section-phone-icon">
-                            <i class="bi bi-telephone-fill"></i>
+                            <i class="bi bi-telephone-fill" aria-hidden="true"></i>
                         </div>
                         <div class="contact-section-phone-content">
                             <h3 class="contact-section-phone-label">Phone</h3>
-                            <a href="tel:1234567890" class="contact-section-phone-value">
+                            <a href="tel:1234567890" class="contact-section-phone-value" tabindex="-1">
                                 1 (234) 567-8900
                             </a>
                         </div>
@@ -1460,27 +1474,27 @@
                             tabindex="0">
                             <i class="bi bi-github"></i>
                         </a>
-                        <span class="contact-section-sr-only">GitHub</span>
+                        <span class="sr-only">GitHub</span>
 
                         <a href="https://linkedin.com/in/yourusername" class="contact-section-social-btn"
                             data-tooltip="LinkedIn" aria-label="LinkedIn Profile" target="_blank"
                             rel="noopener noreferrer" tabindex="0">
                             <i class="bi bi-linkedin"></i>
                         </a>
-                        <span class="contact-section-sr-only">LinkedIn</span>
+                        <span class="sr-only">LinkedIn</span>
 
                         <a href="https://twitter.com/yourusername" class="contact-section-social-btn"
                             data-tooltip="Twitter" aria-label="Twitter Profile" target="_blank"
                             rel="noopener noreferrer" tabindex="0">
                             <i class="bi bi-twitter"></i>
                         </a>
-                        <span class="contact-section-sr-only">Twitter</span>
+                        <span class="sr-only">Twitter</span>
 
                         <a href="https://dev.to/yourusername" class="contact-section-social-btn" data-tooltip="Dev.to"
                             aria-label="Dev.to Profile" target="_blank" rel="noopener noreferrer" tabindex="0">
                             <i class="bi bi-code-slash"></i>
                         </a>
-                        <span class="contact-section-sr-only">Dev.to</span>
+                        <span class="sr-only">Dev.to</span>
 
                     </div>
                 </div>
@@ -1502,14 +1516,19 @@
                      LEFT COLUMN: Brand & Tagline
                      ═══════════════════════════════════════════════════════════ -->
                 <div class="footer-section-left-column">
-                    <h3 class="footer-section-brand-logo">Your Name</h3>
+                    <h3 class="footer-section-brand-logo">Harsh Garg</h3>
                     <p class="footer-section-tagline">Full-Stack Developer | UI/UX Enthusiast</p>
+                    <p class="footer-section-built-with">Built with ❤️ using HTML, CSS, JS</p>
                 </div>
 
                 <!-- ═══════════════════════════════════════════════════════════════
                      RIGHT COLUMN: Quick Links
                      ═══════════════════════════════════════════════════════════ -->
                 <div class="footer-section-right-column">
+                    <!-- Quick Links Heading -->
+                    <h4 class="footer-section-quick-links-title">Quick Links</h4>
+
+                    <!-- Quick Links Row -->
                     <div class="footer-section-quick-links-row">
                         <a href="#sitemap" class="footer-section-quick-link-item">Sitemap</a>
                         <a href="#privacy" class="footer-section-quick-link-item">Privacy Policy</a>
@@ -1533,13 +1552,12 @@
     </footer>
 
     <!-- Component JavaScript -->
+    <script src="./js/utils.js"></script>
     <script src="./js/background-cursor.js"></script>
     <script src="./js/navbar.js"></script>
     <script src="./js/hero.js"></script>
     <script src="./js/about.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js"></script>
-    <!-- Utility Functions (Load First) -->
-    <script type="module" src="./js/utils.js"></script>
     <!-- Component-Specific JS -->
     <script type="module" src="./js/project.js"></script>
     <script src="./js/experience.js"></script>
